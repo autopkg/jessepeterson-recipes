@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>description</key>
+	<string>Downloads Citrix Receiver and imports into Munki.</string>
+	<key>Input</key>
+	<dict>
+		<key>DOWNLOAD_URL</key>
+		<string>http://downloadplugins.citrix.com.edgesuite.net/Mac/CitrixReceiverWeb.dmg</string>
+		<key>IDENTIFIER</key>
+		<string>com.github.autopkg.munki.CitrixReceiver</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>internet_plugins</string>
+		<key>NAME</key>
+		<string>CitrixReceiver</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>description</key>
+			<string>Access your content from any device with Citrix Receiver, the enterprise mobility solution that delivers a high def experience simply and securely.</string>
+			<key>display_name</key>
+			<string>Citrix Receiver</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>minimum_os_version</key>
+			<string>10.6.0</string>
+			<key>blocking_applications</key>
+			<array>
+				<string>Citrix Receiver</string>
+				<string>Safari</string>
+				<string>Firefox</string>
+				<string>Opera</string>
+				<string>Google Chrome</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>%DOWNLOAD_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>flat_pkg_path</key>
+				<string>%pathname%/*.pkg</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/root</string>
+				<key>pkgdirs</key>
+				<dict/>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/com.citrix.ICAClient.pkg/Payload</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/root</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiInstallsItemsCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>faux_root</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/root</string>
+				<key>installs_item_paths</key>
+				<array>
+					<string>/Library/Internet Plug-Ins/CitrixICAClientPlugIn.plugin</string>
+					<string>/Applications/Citrix Receiver.app</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/unpack</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+		</dict>
+	</array>
+</dict>
+</plist>
