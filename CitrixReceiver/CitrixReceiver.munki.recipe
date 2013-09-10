@@ -32,6 +32,8 @@
 				<string>Opera</string>
 				<string>Google Chrome</string>
 			</array>
+			<key>unattended_install</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>Process</key>
