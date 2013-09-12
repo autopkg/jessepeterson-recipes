@@ -16,6 +16,8 @@
 		<string>GrandPerspective-[0-9_\.]*\.dmg</string>
 		<key>SOURCEFORGE_PROJECT_ID</key>
 		<string>148156</string>
+		<key>APP_DESTINATION</key>
+		<string>/Applications/Utilities</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -23,7 +25,7 @@
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>GrandPerspective is a small utility application for Mac OS X that graphically shows the disk usage within a file system. It can help you to manage your disk, as you can easily spot which files and folders take up the most space. It uses a so called tree map for visualisation. Each file is shown as a rectangle with an area proportional to the file's size. Files in the same folder appear together, but their placement is otherwise arbitrary.</string>
+			<string>GrandPerspective is a small utility application for Mac OS X that graphically shows the disk usage within a file system. It can help you to manage your disk, as you can easily spot which files and folders take up the most space. It uses a so called tree map for visualisation. Each file is shown as a rectangle with an area proportional to the file&apos;s size. Files in the same folder appear together, but their placement is otherwise arbitrary.</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
@@ -59,7 +61,7 @@
 				<key>additional_makepkginfo_options</key>
 				<array>
 					<string>--destinationpath</string>
-					<string>/Applications/Utilities</string>
+					<string>%APP_DESTINATION%</string>
 				</array>
 			</dict>
 			<key>Processor</key>
