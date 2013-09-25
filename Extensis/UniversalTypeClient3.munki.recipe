@@ -465,7 +465,7 @@ COMMENTBLOCK</string>
 			<string>FileFinder</string>
 			<key>Arguments</key>
 			<dict>
-				<key>glob_pattern</key>
+				<key>pattern</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%/*.pkg</string>
 			</dict>
 		</dict>
