@@ -18,7 +18,7 @@ class UniversalTypeClient3URLProvider(Processor):
 	input_variables = {}
 	output_variables = {
 		'url': {
-			'description': 'URL to the latest SourceForge project download'
+			'description': 'URL to the latest Universal Type Client 3 download'
 		}
 	}
 
