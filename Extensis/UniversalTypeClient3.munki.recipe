@@ -471,7 +471,7 @@ COMMENTBLOCK</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>FlatPkgExpander</string>
+			<string>FlatPkgUnpacker</string>
 			<key>Arguments</key>
 			<dict>
 				<key>flat_pkg_path</key>
@@ -528,10 +528,10 @@ fi
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>FlatPkgFlattener</string>
+			<string>FlatPkgPacker</string>
 			<key>Arguments</key>
 			<dict>
-				<key>source_pkg_dir</key>
+				<key>source_flatpkg_dir</key>
 				<string>%RECIPE_CACHE_DIR%/unpack</string>
 				<key>destination_pkg</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%.pkg</string>
