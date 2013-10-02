@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MinimumVersion</key>
+	<string>0.2.3</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.PortfolioClient10</string>
+	<key>Description</key>
+	<string>Downloads, re-packages, and imports into Portfolio Client version 10 into Munki.</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>PortfolioClient10</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>minimum_os_version</key>
+			<string>10.6.8</string>
+			<key>blocking_applications</key>
+			<array>
+				<string>Portfolio Client</string>
+			</array>
+			<key>description</key>
+			<string>Portfolio Client application that connects to a Portfolio Server.</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>display_name</key>
+			<string>Portfolio Client</string>
+			<key>uninstall_method</key>
+			<string>uninstall_script</string>
+			<key>uninstall_script</key>
+			<string>#!/bin/sh
+
+/bin/rm -rf &apos;/Applications/Extensis/Portfolio Desktop Client&apos;
+/bin/rm -f  &apos;/Applications/Extensis/.DS_Store&apos;
+/bin/rmdir  &apos;/Applications/Extensis&apos;
+
+/bin/rm -rf &apos;/Library/Contextual Menu Items/PortfolioCM.plugin&apos;
+
+/usr/sbin/pkgutil --packages \
+	| /usr/bin/grep com.extensis.Portfolio.Client.portfolioDesktopClient \
+	| /usr/bin/xargs -n 1 /usr/sbin/pkgutil --forget
+
+exit 
+</string>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>URLTextParseURLProvider</string>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>http://www.extensis.com/support/product-support/portfolio-server-10/</string>
+				<key>re_pattern</key>
+				<string>(http://dl.extensis.com/downloads/../EN/M/Portfolio-Client-M-10-[0-9-]*\.zip)</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%NAME%.zip</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>Unarchiver</string>
+			<key>Arguments</key>
+			<dict>
+				<key>archive_path</key>
+				<string>%pathname%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%/*.mpkg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%found_filename%/Contents/Packages/extensisportfolioclient*.pkg/Contents/Archive.pax.gz</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+				<key>pkgdirs</key>
+				<dict>
+					<key>Applications</key>
+					<string>0755</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>purge_destination</key>
+				<true/>
+				<key>pkg_payload_path</key>
+				<string>%found_filename%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiInstallsItemsCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>faux_root</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+				<key>installs_item_paths</key>
+				<array>
+					<string>/Applications/Extensis/Portfolio Desktop Client/Portfolio Desktop Client.app</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>Versioner</string>
+			<key>Arguments</key>
+			<dict>
+				<key>input_plist_path</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/Extensis/Portfolio Desktop Client/Portfolio Desktop Client.app/Contents/Info.plist</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%version%</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%/*.mpkg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>DmgCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>dmg_root</key>
+				<string>%found_filename%</string>
+				<key>dmg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+					<string>%RECIPE_CACHE_DIR%/%NAME%</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
