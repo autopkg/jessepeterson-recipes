@@ -5,7 +5,7 @@
 	<key>MinimumVersion</key>
 	<string>0.2.3</string>
 	<key>Identifier</key>
-	<string>com.github.jessepeterson.UniversalTypeClient3</string>
+	<string>com.github.jessepeterson.munki.UniversalTypeClient3</string>
 	<key>Description</key>
 	<string>Downloads, re-packages, and imports into Munki Universal Type Client 3.</string>
 	<key>Input</key>
