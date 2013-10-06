@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.VirtualBoxExtPack</string>
+	<key>Description</key>
+	<string>Downloads VirtualBox and imports into Munki.</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>VirtualBoxExtPack</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>display_name</key>
+			<string>VirtualBox Extension Pack</string>
+			<key>description</key>
+			<string>Oracle VirtualBox Extension Pack: Support for USB 2.0 devices, VirtualBox RDP and PXE boot for Intel cards.</string>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>VirtualBoxURLProvider</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>%extpack_url%</string>
+				<key>filename</key>
+				<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack.vbox-extpack</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>DmgCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>dmg_root</key>
+				<string>%pathname%</string>
+				<key>dmg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>installcheck_script</key>
+					<string>#!/bin/sh
+
+VBM=/usr/bin/VBoxManage
+
+if [ ! -f $VBM ]
+then
+	echo &apos;VBoxManage not present&apos;
+	exit 0
+fi
+
+extpackoutput=`mktemp -t extpack`
+
+$VBM list extpacks | /usr/bin/grep -A 1 &apos;Oracle VM VirtualBox Extension Pack&apos; \
+	&gt; &quot;$extpackoutput&quot;
+
+if [ $? -ne 0 ]
+then
+	echo &quot;No Extesnion Pack found in output of $VBM list extpacks&quot;
+
+	rm -f &quot;$extpackoutput&quot;
+	exit 0
+fi
+
+installedver=`cat &quot;$extpackoutput&quot; | /usr/bin/tail -1 | /usr/bin/awk &apos;{print $2}&apos;`
+
+rm -f &quot;$extpackoutput&quot;
+
+if [ &quot;x$installedver&quot; != &quot;x%virtualbox_version%&quot; ]
+then
+	echo &quot;Version mismatch of installed version ($installedver) and expected (%virtualbox_version%)&quot;
+	exit 0
+fi
+
+echo &apos;Extension pack versions appear to match&apos;
+exit 1</string>
+					<key>postinstall_script</key>
+					<string>#!/bin/sh
+
+VBM=/usr/bin/VBoxManage
+
+if [ ! -f $VBM ]
+then
+	echo &apos;VBoxManage not present&apos;
+	exit 1
+fi
+
+$VBM extpack install --replace \
+	/tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack.vbox-extpack
+
+exit $?
+</string>
+					<key>version</key>
+					<string>%virtualbox_version%</string>
+					<key>update_for</key>
+					<array>
+						<string>VirtualBox</string>
+					</array>
+					<key>requires</key>
+					<array>
+						<string>VirtualBox-%virtualbox_version%</string>
+					</array>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>-i</string>
+					<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack.vbox-extpack</string>
+					<string>--destinationpath</string>
+					<string>/tmp</string>
+				</array>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

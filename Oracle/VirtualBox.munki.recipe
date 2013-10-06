@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.VirtualBox</string>
+	<key>Description</key>
+	<string>Downloads VirtualBox and imports into Munki.</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>VirtualBox</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>display_name</key>
+			<string>VirtualBox</string>
+			<key>description</key>
+			<string>Oracle VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product for enterprise as well as home use. Not only is VirtualBox an extremely feature rich, high performance product for enterprise customers, it is also the only professional solution that is freely available as Open Source Software under the terms of the GNU General Public License (GPL) version 2. See &quot;About VirtualBox&quot; for an introduction.</string>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>VirtualBoxURLProvider</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>%virtualbox_url%</string>
+				<key>filename</key>
+				<string>%NAME%.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
