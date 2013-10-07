@@ -24,6 +24,17 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>unattended_install</key>
+			<true/>
+			<key>blocking_applications</key>
+			<array>
+				<string>VirtualBox</string>
+			</array>
+			<key>supported_architectures</key>
+			<array>
+				<string>i386</string>
+				<string>x86_64</string>
+			</array>
 		</dict>
 	</dict>
 	<key>Process</key>

@@ -24,6 +24,8 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>unattended_install</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>Process</key>
@@ -40,7 +42,7 @@
 				<key>url</key>
 				<string>%extpack_url%</string>
 				<key>filename</key>
-				<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack.vbox-extpack</string>
+				<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack</string>
 			</dict>
 		</dict>
 		<dict>
@@ -113,7 +115,7 @@ then
 fi
 
 $VBM extpack install --replace \
-	/tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack.vbox-extpack
+	/tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
 
 exit $?
 </string>
@@ -138,7 +140,7 @@ exit $?
 				<key>additional_makepkginfo_options</key>
 				<array>
 					<string>-i</string>
-					<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack.vbox-extpack</string>
+					<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack</string>
 					<string>--destinationpath</string>
 					<string>/tmp</string>
 				</array>

@@ -43,8 +43,8 @@ class VirtualBoxURLProvider(Processor):
 
 		return latest.strip()
 
-	def get_urls(self, latest):
-		md5_url = '%s/%s/MD5SUMS' % (ROOT_URL, latest)
+	def get_urls(self, version):
+		md5_url = '/'.join((ROOT_URL, version, 'MD5SUMS', ))
 
 		try:
 			f = urllib2.urlopen(md5_url)
@@ -55,13 +55,13 @@ class VirtualBoxURLProvider(Processor):
 
 		m = re_vbox.search(md5sums)
 		if m:
-			vb_url = '/'.join((ROOT_URL, latest, m.group(1), ))
+			vb_url = '/'.join((ROOT_URL, version, m.group(1), ))
 		else:
 			raise ProcessorError('No matching VirtualBox software')
 
 		m = re_ext.search(md5sums)
 		if m:
-			ext_url = '/'.join((ROOT_URL, latest, m.group(1), ))
+			ext_url = '/'.join((ROOT_URL, version, m.group(1), ))
 		else:
 			raise ProcessorError('No matching VirtualBox Ext. Pack software')
 
@@ -71,10 +71,8 @@ class VirtualBoxURLProvider(Processor):
 		self.env['virtualbox_version'] = self.get_latest()
 		self.output('Latest is %s' % self.env['virtualbox_version'])
 
-		vb_url, ext_url = self.get_urls(self.env['virtualbox_version'])
-
-		self.env['virtualbox_url'] = vb_url
-		self.env['extpack_url'] = ext_url
+		self.env['virtualbox_url'], self.env['extpack_url'] = \
+			self.get_urls(self.env['virtualbox_version'])
 
 		self.output('VirtualBox URL: %s' % self.env['virtualbox_url'])
 		self.output('Ext. pack  URL: %s' % self.env['extpack_url'])
