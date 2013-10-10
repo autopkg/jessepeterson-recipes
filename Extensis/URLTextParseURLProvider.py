@@ -23,7 +23,7 @@ class URLTextParseURLProvider(Processor):
 	}
 	output_variables = {
 		'url': {
-			'description': 'URL to the latest Universal Type Client 3 download'
+			'description': 'First matched sub-pattern from input found on the fetched page'
 		}
 	}
 
