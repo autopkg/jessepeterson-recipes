@@ -19,7 +19,10 @@ class TrueCryptURLProvider(Processor):
 	}
 	output_variables = {
 		'url': {
-			'description': 'URL to the latest download'
+			'description': 'URL to the latest download',
+		},
+		'truecrypt_version': {
+			'description': 'Version number',
 		}
 	}
 
@@ -72,8 +75,8 @@ class TrueCryptURLProvider(Processor):
 			else:
 				raise ProcessorError('Could not retrieve URL: %s' % DLS_URL)
 
+		# hack to re-assemble URL with urlencoded filename part
 		url_split = url.split('/')
-
 		new_url = '/'.join(url_split[0:3]) + '/'
 		new_url += urllib.pathname2url('/'.join(url_split[3:]))
 
@@ -81,10 +84,10 @@ class TrueCryptURLProvider(Processor):
 
 
 	def main(self):
-		tc_ver = self.get_version()
-		self.output('Version: %s' % tc_ver)
+		self.env['truecrypt_version'] = self.get_version()
+		self.output('Version: %s' % self.env['truecrypt_version'])
 
-		self.env['url'] = self.get_url(tc_ver)
+		self.env['url'] = self.get_url(self.env['truecrypt_version'])
 		self.output('URL: %s' % self.env['url'])
 
 if __name__ == '__main__':
