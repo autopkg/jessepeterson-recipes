@@ -7,7 +7,7 @@
 	<key>Input</key>
 	<dict>
 		<key>IDENTIFIER</key>
-		<string>com.github.autopkg.munki.CUDADriver</string>
+		<string>com.github.jessepeterson.munki.CUDADriver</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>drivers</string>
 		<key>NAME</key>

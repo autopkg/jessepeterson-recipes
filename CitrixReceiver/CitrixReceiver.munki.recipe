@@ -9,7 +9,7 @@
 		<key>DOWNLOAD_URL</key>
 		<string>http://downloadplugins.citrix.com.edgesuite.net/Mac/CitrixReceiverWeb.dmg</string>
 		<key>IDENTIFIER</key>
-		<string>com.github.autopkg.munki.CitrixReceiver</string>
+		<string>com.github.jessepeterson.munki.CitrixReceiver</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>internet_plugins</string>
 		<key>NAME</key>

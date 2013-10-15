@@ -7,7 +7,7 @@
 	<key>Input</key>
 	<dict>
 		<key>IDENTIFIER</key>
-		<string>com.github.autopkg.munki.GrandPerspective</string>
+		<string>com.github.jessepeterson.munki.GrandPerspective</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
 		<key>NAME</key>
