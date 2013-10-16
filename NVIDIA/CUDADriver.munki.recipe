@@ -20,6 +20,8 @@
 			<string>The NVIDIA CUDA driver allows access to GPU processing for applications.</string>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>RestartAction</key>
+			<string>RequireLogout</string>
 		</dict>
 	</dict>
 	<key>Process</key>
