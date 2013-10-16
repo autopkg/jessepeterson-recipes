@@ -12,6 +12,28 @@
 		<string>ImageJ</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>blocking_applications</key>
+			<array>
+				<string>ImageJ</string>
+			</array>
+			<key>unattended_install</key>
+			<true/>
+			<key>uninstall_method</key>
+			<string>uninstall_script</string>
+			<key>uninstall_script</key>
+			<string>#!/bin/sh
+
+rm -rf /Applications/ImageJ
+</string>
+		</dict>
 	</dict>
 	<key>Process</key>
 	<array>
@@ -155,6 +177,17 @@
 				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications</string>
 				<key>dmg_path</key>
 				<string>%RECIPE_CACHE_DIR%/ImageJ.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+				</array>
 			</dict>
 		</dict>
 		<dict>
