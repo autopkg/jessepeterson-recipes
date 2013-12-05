@@ -59,7 +59,7 @@ exit
 				<key>url</key>
 				<string>http://www.extensis.com/support/product-support/portfolio-server-11/</string>
 				<key>re_pattern</key>
-				<string>(http://bin.extensis.com/Portfolio-Client-11-[0-9-]*-M\.zip)</string>
+				<string>(http://bin.extensis.com/Portfolio-Server-Client-M-11-[0-9-]*\.zip)</string>
 			</dict>
 		</dict>
 		<dict>
