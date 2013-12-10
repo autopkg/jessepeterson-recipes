@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads ClamXav and imports into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.ClamXav</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>ClamXav</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>utilities</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>description</key>
+			<string>ClamXav is a free virus scanner for Mac OS X. It uses the very popular ClamAV open source antivirus engine as a back end and has the ability to detect both Windows and Mac threats.</string>
+			<key>blocking_applications</key>
+			<array>
+				<string>ClamXav</string>
+			</array>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>postinstall_script</key>
+			<string>#!/bin/sh
+
+installer \
+	-target / \
+	-pkg /Applications/ClamXav.app/Contents/Resources/clamavEngineInstaller.pkg
+
+exit $?
+</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>minimum_os_version</key>
+			<string>10.6.0</string>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>URLTextParseURLProvider</string>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>http://www.clamxav.com/download.php</string>
+				<key>re_pattern</key>
+				<string>(http\://www.clamxav.com/downloads/ClamXav\_[0-9\.]*dmg)</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>%url%</string>
+				<key>filename</key>
+				<string>%NAME%.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>--itemname=ClamXav.app</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
