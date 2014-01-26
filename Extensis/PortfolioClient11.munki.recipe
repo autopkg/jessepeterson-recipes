@@ -53,13 +53,13 @@ exit
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextParseURLProvider</string>
+			<string>URLTextSearcher</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
 				<string>http://www.extensis.com/support/product-support/portfolio-server-11/</string>
 				<key>re_pattern</key>
-				<string>(http://bin.extensis.com/Portfolio-Server-Client-M-11-[0-9-]*\.zip)</string>
+				<string>(?P&lt;url&gt;http://bin.extensis.com/Portfolio-Server-Client-M-11-[0-9-]*\.zip)</string>
 			</dict>
 		</dict>
 		<dict>

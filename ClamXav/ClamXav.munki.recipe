@@ -45,13 +45,13 @@ exit $?
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextParseURLProvider</string>
+			<string>URLTextSearcher</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
 				<string>http://www.clamxav.com/download.php</string>
 				<key>re_pattern</key>
-				<string>(http\://www.clamxav.com/downloads/ClamXav\_[0-9\.]*dmg)</string>
+				<string>(?P&lt;url&gt;http\://www.clamxav.com/downloads/ClamXav\_[0-9\.]*dmg)</string>
 			</dict>
 		</dict>
 		<dict>
@@ -59,8 +59,6 @@ exit $?
 			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
-				<key>url</key>
-				<string>%url%</string>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 			</dict>

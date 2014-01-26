@@ -41,13 +41,13 @@ rm -rf /Applications/ImageJ
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextParseURLProvider</string>
+			<string>URLTextSearcher</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
 				<string>http://rsbweb.nih.gov/ij/notes.html</string>
 				<key>re_pattern</key>
-				<string>Version ([0-9a-z\.]*)</string>
+				<string>Version (?P&lt;version&gt;[0-9a-z\.]*)</string>
 			</dict>
 		</dict>
 		<dict>
@@ -58,7 +58,7 @@ rm -rf /Applications/ImageJ
 				<key>additional_pkginfo</key>
 				<dict>
 					<key>version</key>
-					<string>%url%</string>
+					<string>%version%</string>
 				</dict>
 			</dict>
 		</dict>
@@ -75,13 +75,13 @@ rm -rf /Applications/ImageJ
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextParseURLProvider</string>
+			<string>URLTextSearcher</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
 				<string>http://rsbweb.nih.gov/ij/download.html</string>
 				<key>re_pattern</key>
-				<string>(download/osx/ImageJ[0-9]*\.zip)</string>
+				<string>download/osx/ImageJ[0-9]*\.zip</string>
 			</dict>
 		</dict>
 		<dict>
@@ -90,7 +90,7 @@ rm -rf /Applications/ImageJ
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://rsbweb.nih.gov/ij/%url%</string>
+				<string>http://rsbweb.nih.gov/ij/%match%</string>
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 			</dict>

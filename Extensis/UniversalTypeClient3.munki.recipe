@@ -436,13 +436,13 @@ COMMENTBLOCK</string>
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextParseURLProvider</string>
+			<string>URLTextSearcher</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
 				<string>http://www.extensis.com/support/product-support/universal-type-server-3/</string>
 				<key>re_pattern</key>
-				<string>(http://bin.extensis.com/UTC-3-[0-9\-]*-M\.zip)</string>
+				<string>(?P&lt;url&gt;http://bin.extensis.com/UTC-3-[0-9\-]*-M\.zip)</string>
 			</dict>
 		</dict>
 		<dict>
