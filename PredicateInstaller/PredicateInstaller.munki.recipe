@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MinimumVersion</key>
+	<string>0.2.3</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.PredicateInstaller</string>
+	<key>Description</key>
+	<string>Downloads, packages, and imports PredicateInstaller into Munki.</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>PredicateInstaller</string>
+		<key>SCRIPT_NAME</key>
+		<string>predicate_installer.py</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>utilities</string>
+		<key>DOCKUTIL_URL</key>
+		<string>https://raw.github.com/mkuron/PredicateInstaller/master/predicate_installer.py</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>description</key>
+			<string>This is a Python script that uses the private SoftwareUpdate framework to download packages from Apple&apos;s Software Update servers using a predicate.</string>
+			<key>preinstall_script</key>
+			<string>#!/bin/sh
+
+mkdir -p &apos;/usr/local/bin&apos;
+	</string>
+			<key>minimum_os_version</key>
+			<string>10.6.0</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>unattended_install</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>%DOCKUTIL_URL%</string>
+				<key>filename</key>
+				<string>%SCRIPT_NAME%</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>DmgCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>dmg_root</key>
+				<string>%pathname%</string>
+				<key>dmg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>TimestampVersioner</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%version%</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>--itemname=%SCRIPT_NAME%</string>
+					<string>--destinationpath=/usr/local/bin</string>
+					<string>--owner=root</string>
+					<string>--group=wheel</string>
+					<string>--mode=u=rwx,go=rx</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
