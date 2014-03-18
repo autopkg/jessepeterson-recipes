@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads MOOS Project Viewer.</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.MOOSProjectViewer.download</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>MOOSProjectViewer</string>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>http://www.moosprojectviewer.com/notificationDownload.php</string>
+				<key>re_pattern</key>
+				<string>(?P&lt;url&gt;http://www.moosprojectviewer.com/downloads/MOOS-[0-9\.]*dmg)</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%NAME%.dmg</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+	</array>
+</dict>
+</plist>
