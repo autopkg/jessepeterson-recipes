@@ -30,64 +30,6 @@
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
 		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>FlatPkgUnpacker</string>
-			<key>Arguments</key>
-			<dict>
-				<key>flat_pkg_path</key>
-				<string>%pathname%/*.pkg</string>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>PkgRootCreator</string>
-			<key>Arguments</key>
-			<dict>
-				<key>pkgroot</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/root</string>
-				<key>pkgdirs</key>
-				<dict>
-					<key>Library</key>
-					<string>0755</string>
-					<key>Library/Frameworks</key>
-					<string>0755</string>
-				</dict>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>PkgPayloadUnpacker</string>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_payload_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/CUDAFramework.pkg/Payload</string>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/root/Library/Frameworks</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>Versioner</string>
-			<key>Arguments</key>
-			<dict>
-				<key>input_plist_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/root/Library/Frameworks/CUDA.framework/Versions/A/Resources/Info.plist</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>PathDeleter</string>
-			<key>Arguments</key>
-			<dict>
-				<key>path_list</key>
-				<array>
-					<string>%RECIPE_CACHE_DIR%/unpack</string>
-				</array>
-			</dict>
-		</dict>
 	</array>
 </dict>
 </plist>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import urllib2
+import subprocess
 
 from autopkglib import Processor, ProcessorError
 
@@ -32,10 +32,9 @@ class CUDADriverURLProvider(Processor):
 
 	def get_url(self, os_ver):
 		try:
-			f = urllib2.urlopen(CHECK_URL)
-			plist_text = f.read()
-			f.close()
+			plist_text = subprocess.check_output(['curl', '-s', '-3', CHECK_URL])
 		except BaseException as e:
+			print e
 			raise ProcessorError('Could not retrieve check URL %s' % CHECK_URL)
 
 		plist_filename = os.path.join(self.env['RECIPE_CACHE_DIR'], PLIST_FN)
@@ -63,7 +62,7 @@ class CUDADriverURLProvider(Processor):
 				raise ProcessorError('Problem with NSPredicate: %s' % rule['Predicate'])
 	
 			if predicate.evaluateWithObject_(pred_obj):
-				return rule['Codebase']
+				return rule['Codebase'], rule['kServerVersion']
 			
 		raise ProcessorError('No valid Predicate rules found!')
 
@@ -73,8 +72,8 @@ class CUDADriverURLProvider(Processor):
 		else:
 			cuda_os_ver = '10.8'
 
-		self.env['url'] = self.get_url(cuda_os_ver)
-		self.output('File URL %s' % self.env['url'])
+		self.env['url'], self.env['version'] = self.get_url(cuda_os_ver)
+		self.output('File URL %s, Version number %s' % (self.env['url'], self.env['version']))
 
 if __name__ == '__main__':
 	processor = CUDADriverURLProvider()
