@@ -52,7 +52,7 @@ class SourceForgeURLProvider(Processor):
 			pubDate = i.getElementsByTagName('pubDate')[0].firstChild.nodeValue
 			link = i.getElementsByTagName('link')[0].firstChild.nodeValue
 
-			pubDatetime = datetime.datetime.strptime(pubDate, '%a, %d %b %Y %H:%M:%S +0000')
+			pubDatetime = datetime.datetime.strptime(pubDate, '%a, %d %b %Y %H:%M:%S UT')
 
 			if re_file.search(link):
 				items.append((pubDatetime, link),)
