@@ -12,6 +12,8 @@
 		<string>com.github.jessepeterson.munki.ProjectLibre</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Project Management</string>
 		<key>NAME</key>
 		<string>ProjectLibre</string>
 		<key>SOURCEFORGE_FILE_PATTERN</key>
@@ -24,8 +26,12 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>ProjectLibre is an open source project management software. It intends to be a complete desktop replacement for Microsoft Project. ProjectLibre runs on the Java Platform, allowing it to run on Linux, Mac OS or Windows operating systems.</string>
+			<key>developer</key>
+			<string>Geekpolis</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>

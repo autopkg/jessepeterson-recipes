@@ -12,14 +12,20 @@
 		<string>VirtualBox</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Virtualization</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>display_name</key>
 			<string>VirtualBox</string>
 			<key>description</key>
 			<string>Oracle VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product for enterprise as well as home use. Not only is VirtualBox an extremely feature rich, high performance product for enterprise customers, it is also the only professional solution that is freely available as Open Source Software under the terms of the GNU General Public License (GPL) version 2. See &quot;About VirtualBox&quot; for an introduction.</string>
+			<key>developer</key>
+			<string>Oracle</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>

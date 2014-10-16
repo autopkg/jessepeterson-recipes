@@ -12,14 +12,20 @@
 		<string>PDFpen</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Utilities</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>The all-purpose Mac PDF editor! Add signatures, text, and images. Make changes and correct typos. OCR scanned docs. Fill out forms. New in version 6: Microsoft® Word export!</string>
+			<key>developer</key>
+			<string>SmileOnMyMac</string>
 			<key>display_name</key>
 			<string>PDFpen</string>
 			<key>name</key>

@@ -12,6 +12,8 @@
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Image Processing</string>
 		<key>NAME</key>
 		<string>Seashore</string>
 		<key>SOURCEFORGE_FILE_PATTERN</key>
@@ -24,8 +26,12 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>Seashore is a free, open-source image editor for built entirely in Cocoa. It features advanced tools like multiple layers and alpha channel editing, alongside basic tools like gradients, textures, text (with subpixel rendering) and brushes.</string>
+			<key>developer</key>
+			<string>Mark Pazolli</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
