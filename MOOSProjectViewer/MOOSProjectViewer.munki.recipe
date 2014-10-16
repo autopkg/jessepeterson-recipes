@@ -17,7 +17,7 @@
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
-		<string>Office</string>
+		<string>Project Management</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>

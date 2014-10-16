@@ -15,7 +15,7 @@
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
-		<string>Content Management</string>
+		<string>Font Management</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
