@@ -12,12 +12,18 @@
 		<string>ClamXav</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>utilities</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Security</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>ClamXav is a free virus scanner for Mac OS X. It uses the very popular ClamAV open source antivirus engine as a back end and has the ability to detect both Windows and Mac threats.</string>
+			<key>developer</key>
+			<string>Cisco Systems, Inc.</string>
 			<key>blocking_applications</key>
 			<array>
 				<string>ClamXav</string>

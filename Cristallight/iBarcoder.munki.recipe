@@ -10,6 +10,8 @@
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Utilities</string>
 		<key>NAME</key>
 		<string>iBarcoder</string>
 		<key>pkginfo</key>
@@ -18,6 +20,10 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
+			<key>developer</key>
+			<string>Cristallight Software</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>description</key>

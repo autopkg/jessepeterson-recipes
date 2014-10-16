@@ -10,6 +10,8 @@
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Content Management</string>
 		<key>NAME</key>
 		<string>Papers2</string>
 		<key>pkginfo</key>
@@ -18,8 +20,12 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>Papers is an Apple Design Award and Ars Design Award winning solution for managing research literature.</string>
+			<key>developer</key>
+			<string>Mekentosj</string>
 			<key>display_name</key>
 			<string>Papers</string>
 			<key>name</key>

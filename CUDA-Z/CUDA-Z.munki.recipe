@@ -12,6 +12,8 @@
 		<string>com.github.jessepeterson.munki.CUDA-Z</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Utilities</string>
 		<key>NAME</key>
 		<string>CUDA-Z</string>
 		<key>SOURCEFORGE_FILE_PATTERN</key>
@@ -24,8 +26,12 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>CUDA-Z shows some basic information about CUDA-enabled GPUs and GPGPUs. It works with nVIDIA Geforce, Quadro and Tesla cards, ION chipsets.</string>
+			<key>developer</key>
+			<string>Andriy Golovnya</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>

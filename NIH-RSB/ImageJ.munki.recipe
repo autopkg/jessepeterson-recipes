@@ -12,16 +12,22 @@
 		<string>ImageJ</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Image Processing</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>description</key>
 			<string>Image Processing and Analysis in Java. Open source software to read and write GIF, JPEG, and ASCII. Read BMP, DICOM, FITS, and more.</string>
+			<key>developer</key>
+			<string>Wayne Rasband</string>
 			<key>blocking_applications</key>
 			<array>
 				<string>ImageJ</string>

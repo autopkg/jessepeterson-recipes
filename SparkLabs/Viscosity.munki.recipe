@@ -12,14 +12,20 @@
 		<string>Viscosity</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Networking</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>Viscosity is a first class OpenVPN client that lets you secure your network with ease &amp; style.</string>
+			<key>developer</key>
+			<string>SparkLabs</string>
 			<key>display_name</key>
 			<string>Viscosity</string>
 			<key>name</key>

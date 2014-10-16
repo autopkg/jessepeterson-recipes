@@ -12,6 +12,8 @@
 		<string>TrimEnabler</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>utilities</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Utilities</string>
 		<key>APP_DESTINATION</key>
 		<string>/Applications/Utilities</string>
 		<key>pkginfo</key>
@@ -20,8 +22,12 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>Trim is must-have feature for most Solid State Drives. It increases data writing speeds as well as the lifetime of the SSD. With Trim Enabler, you can bring that feature to Mac OS X. It&apos;s as easy as flipping a switch.</string>
+			<key>developer</key>
+			<string>Cindori Software</string>
 			<key>display_name</key>
 			<string>Trim Enabler</string>
 			<key>name</key>

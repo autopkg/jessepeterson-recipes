@@ -10,12 +10,18 @@
 		<string>com.github.jessepeterson.munki.CUDADriver</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>drivers</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Drivers</string>
 		<key>NAME</key>
 		<string>CUDADriver</string>
 		<key>pkginfo</key>
 		<dict>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>display_name</key>
 			<string>NVIDIA CUDA Driver</string>
+			<key>developer</key>
+			<string>NVIDIA Corporation</string>
 			<key>description</key>
 			<string>The NVIDIA CUDA driver allows access to GPU processing for applications.</string>
 			<key>name</key>

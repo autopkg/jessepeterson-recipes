@@ -16,14 +16,20 @@
 		<string>MOOSProjectViewer</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Office</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>MOOS Project Viewer is a viewer for Microsoft® Project that allows you to open, view in a dynamic way and print any Microsoft® Project file. It is running on any Java enabled platform including Windows®, Mac OS X and Linux.</string>
+			<key>developer</key>
+			<string>Stand By Soft</string>
 			<key>display_name</key>
 			<string>MOOS Project Viewer</string>
 			<key>name</key>
