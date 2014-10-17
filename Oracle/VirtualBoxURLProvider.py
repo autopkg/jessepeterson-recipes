@@ -8,6 +8,12 @@ from autopkglib import Processor, ProcessorError
 
 __all__ = ["VirtualBoxURLProvider"]
 
+UPDATE_CHECK_URL = 'https://update.virtualbox.org/query.php?platform=DARWIN_64BITS_GENERIC&version=4.3.16_95972&count=97&branch=stable'
+# While apparently not needed if the VBox folks start filtering by user agent
+# here's an example from a running VirtualBox instance:
+#   VirtualBox 4.3.16 <macosx.64 [Product: Darwiease: 13.4.0 | Version: Darwin Kernel Version 13.4.0: Sun Aug 17 19:50:11 PDT 2014; root:xnu-2422.115.4~1/RELEASE_X86_64]>
+# See also https://github.com/autopkg/jessepeterson-recipes/issues/3
+
 ROOT_URL = 'http://download.virtualbox.org/virtualbox'
 LATEST_URL = ROOT_URL + '/LATEST.TXT'
 
@@ -35,13 +41,13 @@ class VirtualBoxURLProvider(Processor):
 
 	def get_latest(self):
 		try:
-			f = urllib2.urlopen(LATEST_URL)
+			f = urllib2.urlopen(UPDATE_CHECK_URL)
 			latest = f.readline()
 			f.close()
 		except BaseException as e:
 			raise ProcessorError('Could not retrieve URL: %s' % LATEST_URL)
 
-		return latest.strip()
+		return latest.split()[0]
 
 	def get_urls(self, version):
 		md5_url = '/'.join((ROOT_URL, version, 'MD5SUMS', ))
