@@ -43,6 +43,8 @@ class VMwareGuestToolsURLProvider(Processor):
 
 		fusion_feed = parseString(fusion_xml)
 
+		# loop through the various products and versions in the XML file
+		# to find the one we want with the correct version
 		for i in  fusion_feed.getElementsByTagName('metadata'):
 			productId = i.getElementsByTagName('productId')[0].firstChild.nodeValue
 			version = i.getElementsByTagName('version')[0].firstChild.nodeValue
