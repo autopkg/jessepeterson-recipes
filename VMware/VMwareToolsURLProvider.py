@@ -6,13 +6,13 @@ import urllib2
 
 from autopkglib import Processor, ProcessorError
 
-__all__ = ["VMwareGuestToolsURLProvider"]
+__all__ = ["VMwareToolsURLProvider"]
 
 FUSION_URL_BASE = 'http://softwareupdate.vmware.com/cds/vmw-desktop/'
 DARWIN_TOOLS_URL_APPEND = 'packages/com.vmware.fusion.tools.darwin.zip.tar'
 DEFAULT_VERSION_SERIES = '7.0.0'
 
-class VMwareGuestToolsURLProvider(Processor):
+class VMwareToolsURLProvider(Processor):
 	'''Provides URL to the latest Darwin ISO of the VMware Fusion tools.'''
 
 	input_variables = {
@@ -64,6 +64,7 @@ class VMwareGuestToolsURLProvider(Processor):
 						last_url_part = url_part
 
 		if last_url_part:
+			self.output('Version: %s, Build: %s' % (build_ver, build_no))
 			return FUSION_URL_BASE + last_url_part + DARWIN_TOOLS_URL_APPEND
 		else:
 			raise ProcessorError('Could not find suitable version/build')
