@@ -55,9 +55,9 @@ exit $?
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://www.clamxav.com/download.php</string>
+				<string>http://www.clamxav.com/download.html</string>
 				<key>re_pattern</key>
-				<string>(?P&lt;url&gt;http\://www.clamxav.com/downloads/ClamXav\_[0-9\.]*dmg)</string>
+				<string>(?P&lt;urlpart&gt;/downloads/ClamXav\_[0-9\.]*dmg)</string>
 			</dict>
 		</dict>
 		<dict>
@@ -65,6 +65,8 @@ exit $?
 			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
+				<key>url</key>
+				<string>http://www.clamxav.com%urlpart%</string>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 			</dict>
