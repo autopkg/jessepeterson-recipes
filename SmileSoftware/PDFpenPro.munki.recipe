@@ -3,23 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads Seashore and imports into Munki.</string>
+	<string>Imports lastest PDFpenPro into a Munki repo.</string>
 	<key>Identifier</key>
-	<string>com.github.jessepeterson.munki.Seashore</string>
-	<key>MinimumVersion</key>
-	<string>0.4.0</string>
+	<string>com.github.jessepeterson.PDFpenPro.munki</string>
 	<key>Input</key>
 	<dict>
+		<key>NAME</key>
+		<string>PDFpenPro</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
-		<string>Image Processing</string>
-		<key>NAME</key>
-		<string>Seashore</string>
-		<key>SOURCEFORGE_FILE_PATTERN</key>
-		<string>Seashore.zip</string>
-		<key>SOURCEFORGE_PROJECT_ID</key>
-		<string>71670</string>
+		<string>Utilities</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -29,34 +23,23 @@
 			<key>category</key>
 			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
-			<string>Seashore is a free, open-source image editor for built entirely in Cocoa. It features advanced tools like multiple layers and alpha channel editing, alongside basic tools like gradients, textures, text (with subpixel rendering) and brushes.</string>
+			<string>The all-purpose Mac PDF editor! Add signatures, text, and images. Make changes and correct typos. OCR scanned docs. Fill out forms. New in version 6: Microsoft® Word export!</string>
 			<key>developer</key>
-			<string>Mark Pazolli</string>
+			<string>SmileOnMyMac</string>
+			<key>display_name</key>
+			<string>PDFpenPro</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
 	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.jessepeterson.PDFpenPro.download</string>
 	<key>Process</key>
 	<array>
-		<dict>
-			<key>Processor</key>
-			<string>com.github.jessepeterson.munki.GrandPerspective/SourceForgeURLProvider</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-			<key>Arguments</key>
-			<dict>
-				<key>filename</key>
-				<string>%NAME%.zip</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>Unarchiver</string>

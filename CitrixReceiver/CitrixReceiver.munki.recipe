@@ -12,12 +12,18 @@
 		<string>com.github.jessepeterson.munki.CitrixReceiver</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>internet_plugins</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Virtualization</string>
 		<key>NAME</key>
 		<string>CitrixReceiver</string>
 		<key>pkginfo</key>
 		<dict>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>Access your content from any device with Citrix Receiver, the enterprise mobility solution that delivers a high def experience simply and securely.</string>
+			<key>developer</key>
+			<string>Citrix Systems, Inc.</string>
 			<key>display_name</key>
 			<string>Citrix Receiver</string>
 			<key>name</key>

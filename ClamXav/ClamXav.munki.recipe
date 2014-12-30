@@ -12,12 +12,18 @@
 		<string>ClamXav</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>utilities</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Security</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>ClamXav is a free virus scanner for Mac OS X. It uses the very popular ClamAV open source antivirus engine as a back end and has the ability to detect both Windows and Mac threats.</string>
+			<key>developer</key>
+			<string>Cisco Systems, Inc.</string>
 			<key>blocking_applications</key>
 			<array>
 				<string>ClamXav</string>
@@ -49,9 +55,9 @@ exit $?
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://www.clamxav.com/download.php</string>
+				<string>http://www.clamxav.com/download.html</string>
 				<key>re_pattern</key>
-				<string>(?P&lt;url&gt;http\://www.clamxav.com/downloads/ClamXav\_[0-9\.]*dmg)</string>
+				<string>(?P&lt;urlpart&gt;/downloads/ClamXav\_[0-9\.]*dmg)</string>
 			</dict>
 		</dict>
 		<dict>
@@ -59,6 +65,8 @@ exit $?
 			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
+				<key>url</key>
+				<string>http://www.clamxav.com%urlpart%</string>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 			</dict>

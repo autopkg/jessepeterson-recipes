@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads latest Trim Enabler.</string>
+	<key>MinimumVersion</key>
+	<string>0.2</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.TrimEnabler.download</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>%DOWNLOAD_URL%</string>
+				<key>filename</key>
+				<string>%NAME%.dmg</string>
+			</dict>
+		</dict>
+	</array>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>TrimEnabler</string>
+		<key>DOWNLOAD_URL</key>
+		<string>https://s3.amazonaws.com/cindori/TrimEnabler.dmg</string>
+	</dict>
+</dict>
+</plist>

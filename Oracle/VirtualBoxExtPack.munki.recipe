@@ -12,14 +12,20 @@
 		<string>VirtualBoxExtPack</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Virtualization</string>
 		<key>pkginfo</key>
 		<dict>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>display_name</key>
 			<string>VirtualBox Extension Pack</string>
 			<key>description</key>
 			<string>Oracle VirtualBox Extension Pack: Support for USB 2.0 devices, VirtualBox RDP and PXE boot for Intel cards.</string>
+			<key>developer</key>
+			<string>Oracle</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>

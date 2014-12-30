@@ -3,17 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Imports latest version of Viscosity into a Munki repo.</string>
+	<string>Imports latest Trim Enabler into Munki repo.</string>
 	<key>Identifier</key>
-	<string>com.github.jessepeterson.Viscosity.munki</string>
+	<string>com.github.jessepeterson.TrimEnabler.munki</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>Viscosity</string>
+		<string>TrimEnabler</string>
 		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps</string>
+		<string>utilities</string>
 		<key>MUNKI_CATEGORY</key>
-		<string>Networking</string>
+		<string>Utilities</string>
+		<key>APP_DESTINATION</key>
+		<string>/Applications/Utilities</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -23,33 +25,36 @@
 			<key>category</key>
 			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
-			<string>Viscosity is a first class OpenVPN client that lets you secure your network with ease &amp; style.</string>
+			<string>Trim is must-have feature for most Solid State Drives. It increases data writing speeds as well as the lifetime of the SSD. With Trim Enabler, you can bring that feature to Mac OS X. It&apos;s as easy as flipping a switch.</string>
 			<key>developer</key>
-			<string>SparkLabs</string>
+			<string>Cindori Software</string>
 			<key>display_name</key>
-			<string>Viscosity</string>
+			<string>Trim Enabler</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
 	</dict>
-	<key>MinimumVersion</key>
-	<string>0.2.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.jessepeterson.Viscosity.download</string>
+	<string>com.github.jessepeterson.TrimEnabler.download</string>
 	<key>Process</key>
 	<array>
 		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
 			<key>Arguments</key>
 			<dict>
 				<key>pkg_path</key>
 				<string>%pathname%</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>--destinationpath</string>
+					<string>%APP_DESTINATION%</string>
+				</array>
 			</dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
 		</dict>
 	</array>
 </dict>
