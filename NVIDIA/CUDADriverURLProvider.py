@@ -32,7 +32,7 @@ class CUDADriverURLProvider(Processor):
 
 	def get_url(self, os_ver):
 		try:
-			plist_text = subprocess.check_output(['curl', '-s', '-3', CHECK_URL])
+			plist_text = subprocess.check_output(['/usr/bin/curl', '-s', '-1', CHECK_URL])
 		except BaseException as e:
 			print e
 			raise ProcessorError('Could not retrieve check URL %s' % CHECK_URL)
