@@ -97,6 +97,8 @@ Other tools in the package support synchronization of time in the guest operatin
 			<dict>
 				<key>pkg_path</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%.iso</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>munkiimport_pkgname</key>
 				<string>Install VMware Tools.app/Contents/Resources/VMware Tools.pkg</string>
 			</dict>
