@@ -46,8 +46,6 @@ class ImageConverter(Processor):
 		       self.env.get("image_destination"),
 		       ]
 
-		print cmd
-
 		proc = subprocess.Popen(cmd)
 		proc.communicate()
 		if proc.returncode != 0:
