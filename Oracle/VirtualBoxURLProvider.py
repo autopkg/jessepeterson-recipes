@@ -17,7 +17,7 @@ UPDATE_CHECK_URL = 'https://update.virtualbox.org/query.php?platform=DARWIN_64BI
 ROOT_URL = 'http://download.virtualbox.org/virtualbox'
 LATEST_URL = ROOT_URL + '/LATEST.TXT'
 
-re_vbox = re.compile('(VirtualBox-[0-9\.]*-[0-9]*-OSX\.dmg)')
+re_vbox = re.compile('(VirtualBox-([0-9\.]*)-[0-9]*-OSX\.dmg)')
 re_ext = re.compile('(Oracle_VM_VirtualBox_Extension_Pack-[0-9\.]*-[0-9]*\.vbox-extpack)')
 
 class VirtualBoxURLProvider(Processor):
@@ -40,6 +40,17 @@ class VirtualBoxURLProvider(Processor):
 	description = __doc__
 
 	def get_latest(self):
+		'''Retrieve update check URL, parse, and return the current version
+		number of the current VirtualBox. E.g. "4.23.16"
+
+		The update check URL reply body seems to be one line with a version
+		number and URL separated by a space character. In the first iteration
+		of this Processor the first space-seperated parameter was the current
+		version of VirtualBox. Somewhere in May 2015 this started returning
+		a beta release number (5.0.0_BETA4) instead of the current version.
+		So instead of using that first parameter attempt to parse out the
+		version number from the second parameter which apparently is still
+		the correct and current stable release URL.'''
 		try:
 			f = urllib2.urlopen(UPDATE_CHECK_URL)
 			latest = f.readline()
@@ -47,7 +58,15 @@ class VirtualBoxURLProvider(Processor):
 		except BaseException as e:
 			raise ProcessorError('Could not retrieve URL: %s' % LATEST_URL)
 
-		return latest.split()[0]
+		upd_url = latest.split(' ', 1)[1]
+
+		m = re_vbox.search(upd_url)
+		if m:
+			vb_ver = m.group(2)
+		else:
+			raise ProcessorError('No matching VirtualBox URL')
+
+		return vb_ver
 
 	def get_urls(self, version):
 		md5_url = '/'.join((ROOT_URL, version, 'MD5SUMS', ))
