@@ -8,19 +8,21 @@
 	<dict>
 		<key>IDENTIFIER</key>
 		<string>com.github.jessepeterson.download.CUDADriver</string>
+		<key>MAJOR_OS_VERSION</key>
+		<string>10.10</string>
 		<key>NAME</key>
 		<string>CUDADriver</string>
 	</dict>
 	<key>Process</key>
 	<array>
 		<dict>
-			<key>Processor</key>
-			<string>CUDADriverURLProvider</string>
 			<key>Arguments</key>
 			<dict>
 				<key>cuda_os_ver</key>
-				<string>10.10</string>
+				<string>%MAJOR_OS_VERSION%</string>
 			</dict>
+			<key>Processor</key>
+			<string>CUDADriverURLProvider</string>
 		</dict>
 		<dict>
 			<key>Processor</key>

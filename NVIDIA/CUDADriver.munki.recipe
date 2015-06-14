@@ -3,7 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>description</key>
-	<string>Downloads latest NVIDIA CUDA Driver and imports into Munki.</string>
+	<string>Downloads latest NVIDIA CUDA Driver and imports into Munki.
+
+Set MAJOR_OS_VERSION to the version of OS X that will be evaluated against
+NVIDIA's feed of available driver downloads for various OS versions.
+
+The resultant pkginfo will automatically have its 'minimum_os_version'
+pkginfo set according to the lowest OS version supported by the
+found driver download.</string>
 	<key>ParentRecipe</key>
 	<string>com.github.jessepeterson.download.CUDADriver</string>
 	<key>Input</key>
@@ -58,6 +65,8 @@
 			<dict>
 				<key>additional_pkginfo</key>
 				<dict>
+					<key>minimum_os_version</key>
+					<string>%minimum_os_version%</string>
 					<key>version</key>
 					<string>%version%</string>
 				</dict>

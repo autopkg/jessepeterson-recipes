@@ -96,7 +96,7 @@ rm -rf /Applications/ImageJ
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://rsbweb.nih.gov/ij/%match%</string>
+				<string>http://mirror.imagej.net/%match%</string>
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 			</dict>

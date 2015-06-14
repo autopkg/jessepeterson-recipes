@@ -81,13 +81,15 @@ Other tools in the package support synchronization of time in the guest operatin
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>FileMover</string>
+			<string>ImageConverter</string>
 			<key>Arguments</key>
 			<dict>
-				<key>source</key>
+				<key>image_source</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%/payload/darwin.iso</string>
-				<key>target</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%.iso</string>
+				<key>image_destination</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+				<key>image_format</key>
+				<string>UDZO</string>
 			</dict>
 		</dict>
 		<dict>
@@ -96,7 +98,9 @@ Other tools in the package support synchronization of time in the guest operatin
 			<key>Arguments</key>
 			<dict>
 				<key>pkg_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%.iso</string>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>munkiimport_pkgname</key>
 				<string>Install VMware Tools.app/Contents/Resources/VMware Tools.pkg</string>
 			</dict>
