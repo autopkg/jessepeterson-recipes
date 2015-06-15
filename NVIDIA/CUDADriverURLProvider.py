@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import urllib2
+import subprocess
 
 from autopkglib import Processor, ProcessorError
 
@@ -43,10 +43,9 @@ class CUDADriverURLProvider(Processor):
 
 	def get_url(self, os_ver):
 		try:
-			f = urllib2.urlopen(CHECK_URL)
-			plist_text = f.read()
-			f.close()
+			plist_text = subprocess.check_output(['/usr/bin/curl', '-s', '-1', CHECK_URL])
 		except BaseException as e:
+			print e
 			raise ProcessorError('Could not retrieve check URL %s' % CHECK_URL)
 
 		plist_filename = os.path.join(self.env['RECIPE_CACHE_DIR'], PLIST_FN)
@@ -68,10 +67,12 @@ class CUDADriverURLProvider(Processor):
 		pred_obj = {'Ticket': {'Version': ''}, 'SystemVersion': {'ProductVersion': os_ver}}
 
 		url = None
+		version = None
 		for rule in plist['Rules']:
 			if self.evaluate_predicate(pred_obj, rule['Predicate']):
 				self.output('Satisfied predicate for OS version %s' % os_ver)
 				url = rule['Codebase']
+				version = rule['kServerVersion']
 
 				# with a satisfied predicate, evaluate lower OS versions
 				# so as to determine a minimum OS constraint, decrementing
@@ -91,7 +92,7 @@ class CUDADriverURLProvider(Processor):
 
 		if not url:
 			raise ProcessorError('No valid Predicate rules found!')
-		return (url, minimum_os_ver)
+		return (url, version, minimum_os_ver)
 
 	def main(self):
 		if 'cuda_os_ver' in self.env:
@@ -99,8 +100,8 @@ class CUDADriverURLProvider(Processor):
 		else:
 			cuda_os_ver = '10.10'
 
-		self.env['url'], self.env['minimum_os_version'] = self.get_url(cuda_os_ver)
-		self.output('File URL %s' % self.env['url'])
+		self.env['url'], self.env['version'], self.env['minimum_os_version'] = self.get_url(cuda_os_ver)
+		self.output('File URL %s, Version number %s' % (self.env['url'], self.env['version']))
 
 if __name__ == '__main__':
 	processor = CUDADriverURLProvider()

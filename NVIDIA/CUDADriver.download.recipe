@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>description</key>
+	<string>Downloads latest NVIDIA CUDA Driver.</string>
+	<key>Input</key>
+	<dict>
+		<key>IDENTIFIER</key>
+		<string>com.github.jessepeterson.download.CUDADriver</string>
+		<key>MAJOR_OS_VERSION</key>
+		<string>10.10</string>
+		<key>NAME</key>
+		<string>CUDADriver</string>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>cuda_os_ver</key>
+				<string>%MAJOR_OS_VERSION%</string>
+			</dict>
+			<key>Processor</key>
+			<string>CUDADriverURLProvider</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%NAME%-%version%.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+	</array>
+</dict>
+</plist>

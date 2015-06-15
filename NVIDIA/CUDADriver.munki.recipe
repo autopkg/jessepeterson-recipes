@@ -11,12 +11,12 @@ NVIDIA's feed of available driver downloads for various OS versions.
 The resultant pkginfo will automatically have its 'minimum_os_version'
 pkginfo set according to the lowest OS version supported by the
 found driver download.</string>
+	<key>ParentRecipe</key>
+	<string>com.github.jessepeterson.download.CUDADriver</string>
 	<key>Input</key>
 	<dict>
 		<key>IDENTIFIER</key>
 		<string>com.github.jessepeterson.munki.CUDADriver</string>
-		<key>MAJOR_OS_VERSION</key>
-		<string>10.10</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>drivers</string>
 		<key>MUNKI_CATEGORY</key>
@@ -42,66 +42,6 @@ found driver download.</string>
 	<key>Process</key>
 	<array>
 		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>cuda_os_ver</key>
-				<string>%MAJOR_OS_VERSION%</string>
-			</dict>
-			<key>Processor</key>
-			<string>CUDADriverURLProvider</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-			<key>Arguments</key>
-			<dict>
-				<key>filename</key>
-				<string>%NAME%.dmg</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>FlatPkgUnpacker</string>
-			<key>Arguments</key>
-			<dict>
-				<key>flat_pkg_path</key>
-				<string>%pathname%/*.pkg</string>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>PkgRootCreator</string>
-			<key>Arguments</key>
-			<dict>
-				<key>pkgroot</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/root</string>
-				<key>pkgdirs</key>
-				<dict>
-					<key>Library</key>
-					<string>0755</string>
-					<key>Library/Frameworks</key>
-					<string>0755</string>
-				</dict>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>PkgPayloadUnpacker</string>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_payload_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/CUDAFramework.pkg/Payload</string>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/root/Library/Frameworks</string>
-			</dict>
-		</dict>
-		<dict>
 			<key>Processor</key>
 			<string>MunkiInstallsItemsCreator</string>
 			<key>Arguments</key>
@@ -120,15 +60,6 @@ found driver download.</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>Versioner</string>
-			<key>Arguments</key>
-			<dict>
-				<key>input_plist_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/root/Library/Frameworks/CUDA.framework/Versions/A/Resources/Info.plist</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
 			<string>MunkiPkginfoMerger</string>
 			<key>Arguments</key>
 			<dict>
@@ -139,17 +70,6 @@ found driver download.</string>
 					<key>version</key>
 					<string>%version%</string>
 				</dict>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>PathDeleter</string>
-			<key>Arguments</key>
-			<dict>
-				<key>path_list</key>
-				<array>
-					<string>%RECIPE_CACHE_DIR%/unpack</string>
-				</array>
 			</dict>
 		</dict>
 		<dict>
