@@ -16,6 +16,8 @@
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Font Management</string>
+		<key>MUNKI_UNINSTALL</key>
+		<string>UniversalTypeClient.uninstall.sh</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -242,6 +244,15 @@ fi
 		</dict>
 		<dict>
 			<key>Processor</key>
+			<string>FindResource</string>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%MUNKI_UNINSTALL%</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>MunkiImporter</string>
 			<key>Arguments</key>
 			<dict>
@@ -249,7 +260,7 @@ fi
 				<string>%RECIPE_CACHE_DIR%/%NAME%.pkg</string>
 				<key>additional_makepkginfo_options</key>
 				<array>
-					<string>--uninstall_script=%RECIPE_DIR%/UniversalTypeClient.uninstall.sh</string>
+					<string>--uninstall_script=%found_resource%</string>
 				</array>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
