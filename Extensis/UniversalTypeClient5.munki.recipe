@@ -111,48 +111,15 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>file_content</key>
-				<string>#!/bin/bash
-
-				#for debugging:
-				set -x
-
-				#set the permissions on the application bundle
-				sudo chmod -R 775 &quot;$2/Universal Type Client.app&quot;
-
-				#set the ownership of the application bundle
-				sudo chown -R root:wheel &quot;$2/Universal Type Client.app&quot;
-
-				#create UTC directory...
-				if [ ! -d &quot;/Library/Extensis&quot; ]; then
-					sudo mkdir &quot;/Library/Extensis&quot;	
-				fi
-
-				#add the ACL so we can create/delete folders and files inside the Extensis directory
-				sudo chmod +a &quot;everyone allow add_file,add_subdirectory,delete_child,directory_inherit&quot; &quot;/Library/Extensis&quot;
-
-				#create UTC directory...
-				if [ ! -d &quot;/Library/Extensis/UTC&quot; ]; then
-					sudo mkdir &quot;/Library/Extensis/UTC&quot;	
-				fi
-
-				#add the ACL so we can create/delete files and folders inside the UTC directory
-				sudo chmod +a &quot;everyone allow add_file,add_subdirectory,delete_child,directory_inherit&quot; &quot;/Library/Extensis/UTC&quot;
-
-				#copy the corecli app to the /usr/bin directory and change the permissions on it to: 755
-				#Doing this instead of adding it to the PackageMaker project because editing the project can cause &quot;bad&quot; stuff like the &quot;relocatable bundle&quot; issue.
-				if [ -e &quot;$2/Universal Type Client.app/Contents/Resources/corecli&quot; ]; then
-					if [ -e &quot;/usr/bin/corecli&quot; ]; then
-						sudo ditto --rsrc &quot;$2/Universal Type Client.app/Contents/Resources/corecli&quot; &quot;/usr/bin/corecli&quot;
-						sudo chmod 755 &quot;/usr/bin/corecli&quot;
-					fi
-				fi
-				</string>
-				<key>file_path</key>
+				<key>source_path</key>
+				<string>%RECIPE_DIR%/%NAME%.postinstall</string>
+				<key>destination_path</key>
 				<string>%RECIPE_CACHE_DIR%/unpack/universalTypeClient.pkg/Scripts/postinstall</string>
+				<key>overwrite</key>
+				<true/>
 			</dict>
 			<key>Processor</key>
-			<string>FileCreator</string>
+			<string>Copier</string>
 		</dict>
 		<dict>
 			<key>Arguments</key>

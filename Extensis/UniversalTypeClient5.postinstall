@@ -1,0 +1,63 @@
+#!/bin/bash
+
+#for debugging:
+set -x
+
+#get the user and group
+thisuser="$SUDO_USER"
+if [ -z "$thisuser" ]; then
+	thisuser="$USER"
+	#one more test to validate the user
+	if [ -z "$thisuser" ]; then
+		#still not valid, so use id to return the current user
+		thisuser=$(id -un)
+		#yet, one more test then set to the "root" user
+		if [ -z "$thisuser" ]; then
+			thisuser="root"
+		fi
+	fi
+	group=$(id -gn "$thisuser")
+else
+	group=$(id -gn "$thisuser")
+fi
+
+#set the permissions on the application bundle
+sudo chmod -R 775 "$2/Universal Type Client.app"
+
+#set the ownership of the application bundle
+sudo chown -R "$thisuser":"$group" "$2/Universal Type Client.app"
+
+#create UTC directory...
+if [ ! -d "/Library/Extensis" ]; then
+	sudo mkdir "/Library/Extensis"	
+fi
+
+#add the ACL so we can create/delete folders and files inside the Extensis directory
+sudo chmod +a "everyone allow add_file,add_subdirectory,delete_child,directory_inherit" "/Library/Extensis"
+
+#create UTC directory...
+if [ ! -d "/Library/Extensis/UTC" ]; then
+	sudo mkdir "/Library/Extensis/UTC"	
+fi
+
+#add the ACL so we can create/delete files and folders inside the UTC directory
+sudo chmod +a "everyone allow add_file,add_subdirectory,delete_child,directory_inherit" "/Library/Extensis/UTC"
+
+#call the application with the /setupcore argument to setup the core
+if [ -e "$2/Universal Type Client.app/Contents/MacOS/Universal type Client" ]; then
+	#make sure to run this as the current user instead of root
+	USER=$USER "$2/Universal Type Client.app/Contents/MacOS/Universal type Client" --SetupCore YES > /dev/null 2>&1
+fi
+
+#copy the corecli app to the /usr/bin directory and change the permissions on it to: 755
+#Doing this instead of adding it to the PackageMaker project because editing the project can cause "bad" stuff like the "relocatable bundle" issue.
+if [ -e "$2/Universal Type Client.app/Contents/Resources/corecli" ]; then
+	if [ -e "/usr/bin/corecli" ]; then
+		sudo ditto --rsrc "$2/Universal Type Client.app/Contents/Resources/corecli" "/usr/bin/corecli"
+		sudo chmod 755 "/usr/bin/corecli"
+	fi
+fi
+
+#launch the Universal Type Client application
+#sudo su "$thisuser" -c "'/Applications/Universal Type Client.app/Contents/MacOS/Universal Type Client' '-LaunchPluginManager' 'YES'" > /dev/null 2>&1 &
+
