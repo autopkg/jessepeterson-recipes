@@ -2,37 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>MinimumVersion</key>
-	<string>0.2.3</string>
-	<key>Identifier</key>
-	<string>com.github.jessepeterson.munki.UniversalTypeClient5</string>
 	<key>Description</key>
 	<string>Downloads, re-packages, and imports into Munki Universal Type Client 5.</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.UniversalTypeClient5</string>
 	<key>Input</key>
 	<dict>
-		<key>NAME</key>
-		<string>UniversalTypeClient5</string>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Font Management</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps</string>
+		<key>NAME</key>
+		<string>UniversalTypeClient5</string>
 		<key>pkginfo</key>
 		<dict>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>category</key>
-			<string>%MUNKI_CATEGORY%</string>
-			<key>developer</key>
-			<string>Extensis</string>
-			<key>supported_architectures</key>
-			<array>
-				<string>i386</string>
-				<string>x86_64</string>
-			</array>
-			<key>minimum_os_version</key>
-			<string>10.6</string>
 			<key>blocking_applications</key>
 			<array>
 				<string>Adobe Photoshop</string>
@@ -41,398 +24,58 @@
 				<string>Universal Type Client</string>
 				<string>QuarkXPress</string>
 			</array>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>Universal Type Client—end-user client application that connects to a Universal Type Server.</string>
-			<key>name</key>
-			<string>%NAME%</string>
+			<key>developer</key>
+			<string>Extensis</string>
 			<key>display_name</key>
 			<string>Universal Type Client</string>
-			<key>uninstall_method</key>
-			<string>uninstall_script</string>
-			<key>uninstall_script</key>
-			<string>#!/bin/bash
-						# enable global debugging of script
-						## set to "on" to echo additional comments to screen
-						## set to "off" or simply comment out for production
-						#ECHO_DEBUG=on
-
-						#################################################
-						##      LIST ALL FUNCTIONS IN ALPHA ORDER      ##
-						#################################################
-
-						#----------------------------
-						ECHO_DEBUG ()
-						#----------------------------
-						{
-
-						# goal of function:
-						# this function checks for errors to aid in debugging
-						# will echo passed parameters only if ECHO_DEBUG is set to "on" in header of script
-						# yes, ECHO_DEBUG breaks our syntax conventions in favor of readability when debugging.
-						# i grow old, i grow old, i shall wear the bottoms of my trousers rolled . . ."
-						[ "$ECHO_DEBUG" = "on" ] &amp;&amp;  $@
-
-						}  # end of function ECHO_DEBUG
-
-						#----------------------------
-						function_letterhead ()
-						#----------------------------
-						{
-
-						# goal of function:
-						# print a "letterhead" to screen; 50 characters
-						# this prints "as is" spaces, new lines and all
-
-						ECHO_DEBUG echo "[DEBUG] i am function_letterhead"
-
-						}  # end of function "letterhead"
-
-						#----------------------------
-						function_remove_UTC () 
-						#----------------------------
-						{
-
-						# goal of function:
-						## remove all components of UTC except for logs
-
-						ECHO_DEBUG echo "[DEBUG] i am function_remove UTC"
-
-						echo "Closing System Preferences . . ."
-						# close system preferences on osx 10.7, 10.6 and 10.5 machines in case UTCore preference panel is open
-						# note: unable to close on 10.4 machine
-						SYSTEM_PREFERENCES=$(ps -ax | grep -i "/Applications/System Preferences.app/Contents/MacOS/System Preferences" | grep -vi "grep" | awk ' { print $1 } ')
-						if [ -n "$SYSTEM_PREFERENCES" ]; then
-							sudo kill -s KILL "$SYSTEM_PREFERENCES" &gt; /dev/null 2&gt;&amp;1
-							sleep 3
-						fi
-						echo ". . . Done"
-
-						# stop the QuickMatch process called QMRenderer
-						echo "Shutting down QuickMatch/QMRenderer . . ."
-						QUICK_MATCH=$(ps -ax | grep -i "/Applications/Universal Type Client.app/Contents/Resources/QMRenderer" | grep -vi "grep" | awk ' { print $1 } ')
-						if [ -n "$QUICK_MATCH" ]; then
-							sudo kill -s KILL "$QUICK_MATCH" &gt; /dev/null 2&gt;&amp;1
-							sleep 3
-						fi
-						echo ". . . Done"
-
-						## stop the FMCore process for v2 thru v5
-						echo "Shutting down Universal Type Core . . ."
-						UTCORE_NEW=$(ps -ax | grep -i "Universal Type Client.app/Contents/Resources/FMCore" | grep -vi "grep" | awk ' { print $1 } ')
-						while [ -n "$UTCORE_NEW" ]; do
-							sudo kill -s KILL "$UTCORE_NEW" &gt; /dev/null 2&gt;&amp;1
-							UTCORE_NEW=$(ps -ax | grep -i "Universal Type Client.app/Contents/Resources/FMCore" | grep -vi "grep" | awk ' { print $1 } ')
-						done
-
-						## stop the UTCore process for v1
-						UTCORE_OLD=$(ps -ax | grep -i "Universal Type Client.app/Contents/Resources/UTCore" | grep -vi "grep" | awk ' { print $1 } ')
-						while [ -n "$UTCORE_OLD" ]; do
-							sudo kill -s KILL "$UTCORE_OLD" &gt; /dev/null 2&gt;&amp;1
-							UTCORE_OLD=$(ps -ax | grep -i "Universal Type Client.app/Contents/Resources/UTCore" | grep -vi "grep" | awk ' { print $1 } ')
-						done
-						echo ". . . Done"
-
-						# stop the app
-						echo "Shutting down $APP application . . ."
-						UTC_APPLICATION=$(ps -ax | grep -i "Universal Type Client.app/Contents/MacOS/Universal Type Client" | grep -vi "grep" | awk ' { print $1 } ')
-						if [ -n "$UTC_APPLICATION" ]; then
-							sudo kill -s KILL "$UTC_APPLICATION" &gt; /dev/null 2&gt;&amp;1
-						fi
-						sleep 3
-						echo ". . . Done"
-
-						# remove the application
-						echo "Removing $APP application . . ."
-						sudo rm -rf "/Applications/Universal Type Client.app" &gt; /dev/null 2&gt;&amp;1
-						echo ". . . Done"
-
-						# remove the plugin frameworks, launch agent and ut-core prefpane
-						echo "Removing $APP plugin frameworks . . ."
-						sudo rm -rf "/Library/Frameworks/ExtensisFontManagement.framework" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Frameworks/ExtensisPluginInterface.framework" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Frameworks/ExtensisPlugins.framework" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/LaunchAgents/com.extensis.FMCore.plist" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/PreferencePanes/utcore-prefpane.prefPane" &gt; /dev/null 2&gt;&amp;1 
-						echo ". . . Done"
-
-						# remove launch agent
-						echo "Removing $APP launch agent. . ."
-						sudo rm -rf "/Library/LaunchAgents/com.extensis.FMCore.plist" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/private/var/run/SCHelper" &gt; /dev/null 2&gt;&amp;1 
-						echo ". . . Done"
-
-						# remove optional config file
-						echo "Removing $APP config file . . ."
-						sudo rm -rf "/Library/Preferences/com.extensis.UniversalTypeClient.conf"  &gt; /dev/null 2&gt;&amp;1  
-						sudo rm -rf  "/Library/Preferences/com.extensis.TypeServerCoreClient.conf"  &gt; /dev/null 2&gt;&amp;1   
-						echo ". . . Done"
-
-						# remove the user preferences and odds and ends for all user accounts
-						echo "Removing $APP preference files for all user accounts . . ."
-						# create a variable for all users accounts.
-						## note: use ls -1 (one) not ls -l (larry)
-						USERS="$(ls -1 /Users)"
-						for USERDIR in $USERS; do
-							sudo rm -rf "/Users/$USERDIR/.Extensis" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/.UTCore" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/Library/Preferences/com.extensis.FontManagement.plugins.*" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/Library/Preferences/com.extensis.utcore-prefpane.plist" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/Library/Preferences/com.extensis.UniversalTypeClient.db" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/Library/Preferences/com.extensis.UniversalTypeClient.plist" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/Library/Preferences/com.extensis.UniversalType.plugins.*" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/Library/Preferences/UTCorePrefs.db" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/Users/$USERDIR/Library/Caches/FMCore" &gt; /dev/null 2&gt;&amp;1
-							sudo rm -rf "/usr/bin/corecli" &gt; /dev/null 2&gt;&amp;1
-						done
-						echo ". . . Done"
-
-						echo "Removing $APP plug-ins . . ."
-						# remove the auto-activation plugins
-						## Universal Type Client 5x, 4x, 3x and 2x
-						### remove illustrator CS2, CS3, CS4, CS5, CS 5.5 (aka 5.1), CS6, CC (aka CS7) and CC 2014
-						sudo rm -rf "/Applications/Adobe Illustrator CS2/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICS2.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Illustrator CS3/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICS3.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Illustrator CS4/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICS4.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Illustrator CS5/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICS5.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Illustrator CS5.1/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICS5.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Illustrator CS6/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICS6.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Illustrator CC/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICS7.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Illustrator CC 2014/Plug-ins.localized/Extensions.localized/ExtensisFontManagementAICC2014.aip" &gt; /dev/null 2&gt;&amp;1
-
-						### remove incopy CS4, CS5, CS 5.5 (aka 5.1), CS6, CC (aka CS7) and CC 2014
-						sudo rm -rf "/Applications/Adobe InCopy CS4/Plug-Ins/Font Activation/ExtensisFontManagementICCS4.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InCopy CS5/Plug-Ins/Font Activation/ExtensisFontManagementICCS5.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InCopy CS5.5/Plug-Ins/Font Activation/ExtensisFontManagementICCS5.5.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InCopy CS6/Plug-Ins/Font Activation/ExtensisFontManagementICCS6.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InCopy CC/Plug-Ins/Font Activation/ExtensisFontManagementICCS7.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InCopy CC 2014/Plug-Ins/Font Activation/ExtensisFontManagementICCC2014.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-
-						### remove indesign CS2, CS3, CS4, CS5, CS 5.5, CS6, CC (aka CS7) and CC 2014
-						sudo rm -rf "/Applications/Adobe InDesign CS2/Plug-Ins/Font Activation/ExtensisFontManagementIDCS2.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS3/Plug-Ins/Font Activation/ExtensisFontManagementIDCS3.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS4/Plug-Ins/Font Activation/ExtensisFontManagementIDCS4.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS5/Plug-Ins/Font Activation/ExtensisFontManagementIDCS5.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS5.5/Plug-Ins/Font Activation/ExtensisFontManagementIDCS5.5.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS6/Plug-Ins/Font Activation/ExtensisFontManagementIDCS6.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CC/Plug-Ins/Font Activation/ExtensisFontManagementIDCS7.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CC 2014/Plug-Ins/Font Activation/ExtensisFontManagementIDCC2014.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-
-						### remove photoshop CS4, CS5, CS 5.5 (aka 5.1), CS6, CC (aka CS7) and CC 2014
-						sudo rm -rf "/Applications/Adobe Photoshop CS4/Plug-Ins/Automate/ExtensisFontManagementPSCS4.plugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Photoshop CS5/Plug-Ins/Automate/ExtensisFontManagementPSCS5.plugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Photoshop CS5.1/Plug-ins/Automate/ExtensisFontManagementPSCS5.plugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Photoshop CS6/Plug-ins/Automate/ExtensisFontManagementPSCS6.plugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Photoshop CC/Plug-ins/Automate/ExtensisFontManagementPSCS7.plugin" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe Photoshop CC 2014/Plug-Ins/Automate/ExtensisFontManagementPSCC2014.plugin" &gt; /dev/null 2&gt;&amp;1
-
-						### remove QXP7, QXP8, QXP9 and QXP10 plug-ins
-						sudo rm -rf "/Applications/QuarkXPress 7/XTensions/ExtensisFontManagementQXT7.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 7.31/XTensions/ExtensisFontManagementQXT7.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 7.5/XTensions/ExtensisFontManagementQXT7.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 8/XTensions/ExtensisFontManagementQXT8.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 9/XTensions/ExtensisFontManagementQXT9.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 10/XTensions/ExtensisFontManagementQXT10.xnt" &gt; /dev/null 2&gt;&amp;1
- 
-						## Universal Type Client 1.x
-						### remove CS2, CS3, CS4, QXP7, QXP8 plug-ins
-						sudo rm -rf "/Applications/Adobe Illustrator CS2/Plug-ins.localized/Extensions.localized/UniversalTypeAICS2.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS2/Plug-Ins/UniversalTypeIDCS2.framework" &gt; /dev/null 2&gt;&amp;1
-
-						sudo rm -rf "/Applications/Adobe Illustrator CS3/Plug-ins.localized/Extensions.localized/UniversalTypeAICS3.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS3/Plug-Ins/UniversalTypeIDCS3.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-
-						sudo rm -rf "/Applications/Adobe Illustrator CS4/Plug-ins.localized/Extensions.localized/UniversalTypeAICS4.aip" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/Adobe InDesign CS4/Plug-Ins/UniversalTypeIDCS4.InDesignPlugin" &gt; /dev/null 2&gt;&amp;1
-
-						sudo rm -rf "/Applications/QuarkXPress 7/XTensions/UniversalTypeQuarkXT7.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 7.31/XTensions/UniversalTypeQuarkXT7.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 7.5/XTensions/UniversalTypeQuarkXT7.xnt" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Applications/QuarkXPress 8/XTensions/UniversalTypeQuarkXT8.xnt" &gt; /dev/null 2&gt;&amp;1
-						echo ". . . Done"
-
-						# remove the font panels
-						echo "Removing $APP font panels . . ."
-						# remove the CS5, CS 5.5, CS6, CC and CC 2014 font panels
-						# for adobe CC 2014:
-						sudo rm -rf /Library/Application\ Support/Adobe/CEP/extensions/Extensis_* &gt; /dev/null 2&gt;&amp;1
-						# for adobe CC:
-						sudo rm -rf /Library/Application\ Support/Adobe/CEPServiceManager4/extensions/Extensis_* &gt; /dev/null 2&gt;&amp;1
-						# for CS6:
-						sudo rm -rf /Library/Application\ Support/Adobe/CS6ServiceManager/extensions/Extensis_* &gt; /dev/null 2&gt;&amp;1
-						# for CS5:
-						sudo rm -rf /Library/Application\ Support/Adobe/CS5ServiceManager/extensions/Extensis_* &gt; /dev/null 2&gt;&amp;1
-						echo ". . . Done" 
-    
-						# remove receipts for osx 10.6 thru 10.9
-						echo "Removing $APP receipts . . ."
-						### Universal Type Client 4x, 3x, 2x, 1x
-						### remove with wildcard
-						sudo rm -rf /private/var/db/receipts/com.extensis.UniversalTypeClient.* &gt; /dev/null 2&gt;&amp;1
-
-						# remove receipts for osx 10.4 and 10.5
-						## Universal Type Client 3.x
-						sudo rm -rf "/Library/Receipts/universalTypeClient.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/info.pkg" &gt; /dev/null 2&gt;&amp;1
-
-						## Universal Type Client 2.x
-						sudo rm -rf "/Library/Receipts/extensisfontmanagement.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementaics2.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementaics3.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementaics4.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementaics5.pkg" &gt; /dev/null 2&gt;&amp;1
-
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementidcs2.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementidcs3.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementidcs4.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementidcs5.pkg" &gt; /dev/null 2&gt;&amp;1
-
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementqxt7.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisfontmanagementqxt8.pkg" &gt; /dev/null 2&gt;&amp;1
-
-						sudo rm -rf "/Library/Receipts/extensisplugininterface.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/extensisplugins.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/pluginfinder.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/universalTypeClient.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/utcoreprefpane.pkg" &gt; /dev/null 2&gt;&amp;1
-
-						## Universal Type Client 1.x
-						sudo rm -rf "/Library/Receipts/Universal Type Client.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/UniversalTypeAICS2.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/UniversalTypeAICS3.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/UniversalTypeIDCS2.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/UniversalTypeIDCS3.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/UniversalTypeQuarkXT7.pkg" &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Receipts/UTCore-Prefpane.pkg" &gt; /dev/null 2&gt;&amp;1
-						echo ". . . Done"
-
-						# remove the UTC font cache for all users
-						echo "Removing $APP cache . . ."
-						sudo rm -rf /Library/Extensis/UTC/* &gt; /dev/null 2&gt;&amp;1
-						sudo rm -rf "/Library/Extensis/com.extensis.FMCore-LaunchInfo.conf" &gt; /dev/null 2&gt;&amp;1
-						echo ". . . Done"
-						echo ""
-
-						}  # end function_remove_UTC
-
-						#----------------------------
-						function_verify_is_mac_admin ()
-						#----------------------------
-						{
-
-						# goal of function:
-						# verify user has macintosh administrator credentials to continue
-						# an admin account must have a valid password for our script to work; an admin account with a blank password is a security risk
-
-						ECHO_DEBUG echo "[DEBUG] i am function_verify_is_mac_admin"
-
-						echo "Hello, "$USER"."
-						echo ""
-						echo "This script must be run under an ADMINISTRATOR account."
-						echo "Enter your MACINTOSH ADMINISTRATOR password and press [RETURN]."
-						echo ""
-						echo "NOTE: The cursor will not move and your password will not be displayed"
-						echo "as you type. That's OK. Just type carefully and press [RETURN]."
-						echo ""
-
-						# call sudo to get admin/root authentication
-						sudo whoami &gt; /dev/null 2&gt;&amp;1
-
-						# if user has a mac admin password then continue
-						if [ $? = 0 ]; then
-							echo ""
-							echo "OK. This is a MACINTOSH ADMINISTRATOR account. Let's proceed."
-							echo ""
-							MAC_ADMIN_PASSWORD=good
-							ECHO_DEBUG echo "[DEBUG] MAC_ADMIN_PASSWORD="$MAC_ADMIN_PASSWORD" "
-						else
-							# else exit with error msg
-							echo ""
-							echo "Sorry, three strikes and you're out :)"
-							echo ""
-							echo "Please log into a MACINTOSH ADMINISTRATOR account"
-							echo "that has a valid password and run this script again."
-							echo "NOTE: Using a blank password for your mac is a security risk."
-							echo ""
-							MAC_ADMIN_PASSWORD=bad
-							ECHO_DEBUG echo "[DEBUG] MAC_ADMIN_PASSWORD="$MAC_ADMIN_PASSWORD" "
-							exit 1
-						fi
-
-						}   # end of function_verify_is_mac_admin
-
-
-						#################################################
-						##             SCRIPT starts here              ##
-						#################################################
-
-						# print a "letterhead" to screen with a function
-						function_letterhead
-
-						# declare our variables
-						APP="Universal Type Client"
-
-						# run function_verify_is_mac_admin
-						function_verify_is_mac_admin
-
-						# write a msg to system.log
-						logger com.extensis.support.UTC-removal-tool: Removing $APP now . . . 
-	
-						# run function_remove_UTC
-						function_remove_UTC
-
-						# write a msg to system.log
-						logger com.extensis.support.UTC-removal-tool: $APP successfully removed. 
-	
-	
-	
-						# print results to screen 
-						echo "--------------------------------------------------------------"
-						echo "*** RESULT ***"
-						echo "--------------------------------------------------------------"
-						echo ""
-						echo "$APP has been successfully removed."
-						echo "--------------------------------------------------------------"
-
-						# say goodbye
-						echo ""
-						echo "You can quit Terminal now."
-						echo ""
-						echo "Best Regards, Extensis."
-						echo ""                         # end with a new line for visibility
-
-						exit
-			</string>
+			<key>minimum_os_version</key>
+			<string>10.6</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>supported_architectures</key>
+			<array>
+				<string>i386</string>
+				<string>x86_64</string>
+			</array>
 		</dict>
 	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.3</string>
 	<key>Process</key>
 	<array>
 		<dict>
-			<key>Processor</key>
-			<string>URLTextSearcher</string>
 			<key>Arguments</key>
 			<dict>
-				<key>url</key>
-				<string>http://www.extensis.com/support/product-support/universal-type-server-5/</string>
 				<key>re_pattern</key>
 				<string>(?P&lt;url&gt;http://bin.extensis.com/UTC-5-[0-9\-]*-M\.zip)</string>
+				<key>url</key>
+				<string>http://www.extensis.com/support/product-support/universal-type-server-5/</string>
 			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>Unarchiver</string>
 			<key>Arguments</key>
 			<dict>
 				<key>archive_path</key>
@@ -442,34 +85,32 @@
 				<key>purge_destination</key>
 				<true/>
 			</dict>
+			<key>Processor</key>
+			<string>Unarchiver</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>FileFinder</string>
 			<key>Arguments</key>
 			<dict>
 				<key>pattern</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%/*.pkg</string>
 			</dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>FlatPkgUnpacker</string>
 			<key>Arguments</key>
 			<dict>
-				<key>flat_pkg_path</key>
-				<string>%found_filename%</string>
 				<key>destination_path</key>
 				<string>%RECIPE_CACHE_DIR%/unpack</string>
+				<key>flat_pkg_path</key>
+				<string>%found_filename%</string>
 			</dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>FileCreator</string>
 			<key>Arguments</key>
 			<dict>
-				<key>file_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/universalTypeClient.pkg/Scripts/postinstall</string>
 				<key>file_content</key>
 				<string>#!/bin/bash
 
@@ -507,47 +148,49 @@
 					fi
 				fi
 				</string>
+				<key>file_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/universalTypeClient.pkg/Scripts/postinstall</string>
 			</dict>
+			<key>Processor</key>
+			<string>FileCreator</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>FlatPkgPacker</string>
 			<key>Arguments</key>
 			<dict>
-				<key>source_flatpkg_dir</key>
-				<string>%RECIPE_CACHE_DIR%/unpack</string>
 				<key>destination_pkg</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%.pkg</string>
+				<key>source_flatpkg_dir</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
 			</dict>
+			<key>Processor</key>
+			<string>FlatPkgPacker</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>PkgRootCreator</string>
 			<key>Arguments</key>
 			<dict>
-				<key>pkgroot</key>
-				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 				<key>pkgdirs</key>
 				<dict>
 					<key>Applications</key>
 					<string>0755</string>
 				</dict>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 			</dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>PkgPayloadUnpacker</string>
 			<key>Arguments</key>
 			<dict>
-				<key>pkg_payload_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/universalTypeClient.pkg/Payload</string>
 				<key>destination_path</key>
 				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications</string>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/universalTypeClient.pkg/Payload</string>
 			</dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>MunkiInstallsItemsCreator</string>
 			<key>Arguments</key>
 			<dict>
 				<key>faux_root</key>
@@ -557,23 +200,23 @@
 					<string>/Applications/Universal Type Client.app</string>
 				</array>
 			</dict>
+			<key>Processor</key>
+			<string>MunkiInstallsItemsCreator</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>Versioner</string>
 			<key>Arguments</key>
 			<dict>
 				<key>input_plist_path</key>
 				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/Universal Type Client.app/Contents/Info.plist</string>
 			</dict>
+			<key>Processor</key>
+			<string>Versioner</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>MunkiPkginfoMerger</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>MunkiPkginfoMerger</string>
 			<key>Arguments</key>
 			<dict>
 				<key>additional_pkginfo</key>
@@ -582,10 +225,10 @@
 					<string>%version%</string>
 				</dict>
 			</dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>PathDeleter</string>
 			<key>Arguments</key>
 			<dict>
 				<key>path_list</key>
@@ -594,17 +237,23 @@
 					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 				</array>
 			</dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
 			<key>Arguments</key>
 			<dict>
 				<key>pkg_path</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%.pkg</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>--uninstall_script=%RECIPE_DIR%/UniversalTypeClient.uninstall.sh</string>
+				</array>
 			</dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
 		</dict>
 	</array>
 </dict>
