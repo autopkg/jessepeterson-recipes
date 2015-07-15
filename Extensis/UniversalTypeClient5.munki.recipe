@@ -14,6 +14,8 @@
 		<string>apps</string>
 		<key>NAME</key>
 		<string>UniversalTypeClient5</string>
+		<key>MUNKI_UNINSTALL</key>
+		<string>UniversalTypeClient.uninstall.sh</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
@@ -208,6 +210,15 @@
 			<string>PathDeleter</string>
 		</dict>
 		<dict>
+			<key>Processor</key>
+			<string>FindResource</string>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%MUNKI_UNINSTALL%</string>
+			</dict>
+		</dict>
+		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>pkg_path</key>
@@ -216,7 +227,7 @@
 				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>additional_makepkginfo_options</key>
 				<array>
-					<string>--uninstall_script=%RECIPE_DIR%/UniversalTypeClient.uninstall.sh</string>
+					<string>--uninstall_script=%found_resource%</string>
 				</array>
 			</dict>
 			<key>Processor</key>
