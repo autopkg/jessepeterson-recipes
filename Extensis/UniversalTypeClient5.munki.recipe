@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads, re-packages, and imports into Munki Universal Type Client 5.</string>
+	<string>Re-packages, and imports Extensis Universal Type Client 5 into Munki repo.</string>
 	<key>Identifier</key>
 	<string>com.github.jessepeterson.munki.UniversalTypeClient5</string>
 	<key>Input</key>
@@ -53,32 +53,10 @@
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.3</string>
+	<key>ParentRecipe</key>
+	<string>com.github.jessepeterson.download.UniversalTypeClient5</string>
 	<key>Process</key>
 	<array>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>re_pattern</key>
-				<string>(?P&lt;url&gt;http://bin.extensis.com/UTC-5-[0-9\-]*-M\.zip)</string>
-				<key>url</key>
-				<string>http://www.extensis.com/support/product-support/universal-type-server-5/</string>
-			</dict>
-			<key>Processor</key>
-			<string>URLTextSearcher</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>filename</key>
-				<string>%NAME%.zip</string>
-			</dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
