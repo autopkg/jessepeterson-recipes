@@ -91,7 +91,7 @@ $VBM list extpacks | /usr/bin/grep -A 1 &apos;Oracle VM VirtualBox Extension Pac
 
 if [ $? -ne 0 ]
 then
-	echo &quot;No Extesnion Pack found in output of $VBM list extpacks&quot;
+	echo &quot;No Extension Pack found in output of $VBM list extpacks&quot;
 
 	rm -f &quot;$extpackoutput&quot;
 	exit 0
