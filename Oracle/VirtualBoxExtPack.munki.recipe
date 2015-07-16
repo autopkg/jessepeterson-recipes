@@ -76,7 +76,7 @@
 					<key>installcheck_script</key>
 					<string>#!/bin/sh
 
-VBM=/usr/bin/VBoxManage
+VBM=/usr/local/bin/VBoxManage
 
 if [ ! -f $VBM ]
 then
@@ -112,7 +112,7 @@ exit 1</string>
 					<key>postinstall_script</key>
 					<string>#!/bin/sh
 
-VBM=/usr/bin/VBoxManage
+VBM=/usr/local/bin/VBoxManage
 
 if [ ! -f $VBM ]
 then
