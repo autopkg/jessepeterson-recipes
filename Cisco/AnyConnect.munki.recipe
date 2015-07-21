@@ -93,6 +93,17 @@
 				<string>%MUNKI_REPO_SUBDIR%</string>
 			</dict>
 		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>com.github.keeleysam.recipes.GoogleTalkPlugin/MunkiPkginfoReceiptsEditor</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_ids_set_optional_true</key>
+				<array>
+					<string>com.cisco.pkg.anyconnect.websecurity</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>
