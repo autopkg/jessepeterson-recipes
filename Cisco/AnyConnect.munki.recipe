@@ -73,6 +73,10 @@
 	<array>
 		<dict>
 			<key>Processor</key>
+			<string>PackageRequired</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>Copier</string>
 			<key>Arguments</key>
 			<dict>
