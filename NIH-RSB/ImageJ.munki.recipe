@@ -140,7 +140,7 @@ rm -rf /Applications/ImageJ
 				<key>source_path</key>
 				<string>%RECIPE_CACHE_DIR%/downloads/ij.jar</string>
 				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/ImageJ/ImageJ64.app/Contents/Resources/Java/ij.jar</string>
+				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/ImageJ/ImageJ32.app/Contents/Resources/Java/ij.jar</string>
 				<key>overwrite</key>
 				<true/>
 			</dict>
@@ -168,7 +168,7 @@ rm -rf /Applications/ImageJ
 				<key>installs_item_paths</key>
 				<array>
 					<string>/Applications/ImageJ/ImageJ.app/Contents/Resources/Java/ij.jar</string>
-					<string>/Applications/ImageJ/ImageJ64.app/Contents/Resources/Java/ij.jar</string>
+					<string>/Applications/ImageJ/ImageJ32.app/Contents/Resources/Java/ij.jar</string>
 				</array>
 			</dict>
 		</dict>
