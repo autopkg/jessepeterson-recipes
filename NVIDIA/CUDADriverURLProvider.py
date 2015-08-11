@@ -26,6 +26,9 @@ class CUDADriverURLProvider(Processor):
 		'minimum_os_version': {
 			'description': 'Minimum OS version requirement of the Driver DMG download.'
 		},
+		'version': {
+			'description': 'Version of CUDA Driver DMG download.'
+		},
 		'url': {
 			'description': 'URL to the latest CUDA Driver DMG download.'
 		},

@@ -6,9 +6,9 @@
 	<string>Downloads latest NVIDIA CUDA Driver and imports into Munki.
 
 Set MAJOR_OS_VERSION to the version of OS X that will be evaluated against
-NVIDIA's feed of available driver downloads for various OS versions.
+NVIDIA&apos;s feed of available driver downloads for various OS versions.
 
-The resultant pkginfo will automatically have its 'minimum_os_version'
+The resultant pkginfo will automatically have its &apos;minimum_os_version&apos;
 pkginfo set according to the lowest OS version supported by the
 found driver download.</string>
 	<key>ParentRecipe</key>
@@ -41,23 +41,6 @@ found driver download.</string>
 	</dict>
 	<key>Process</key>
 	<array>
-		<dict>
-			<key>Processor</key>
-			<string>MunkiInstallsItemsCreator</string>
-			<key>Arguments</key>
-			<dict>
-				<key>faux_root</key>
-				<string>%RECIPE_CACHE_DIR%/unpack/root</string>
-				<key>installs_item_paths</key>
-				<array>
-					<string>/Library/Frameworks/CUDA.framework</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>MunkiPkginfoMerger</string>
-		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>MunkiPkginfoMerger</string>
