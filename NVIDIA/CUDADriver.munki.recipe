@@ -52,6 +52,21 @@ found driver download.</string>
 					<string>%minimum_os_version%</string>
 					<key>version</key>
 					<string>%version%</string>
+					<key>installs</key>
+					<array>
+						<dict>
+							<key>CFBundleShortVersionString</key>
+							<string>%version%</string>
+							<key>CFBundleVersion</key>
+							<string>%version%</string>
+							<key>path</key>
+							<string>/Library/Frameworks/CUDA.framework</string>
+							<key>type</key>
+							<string>bundle</string>
+							<key>version_comparison_key</key>
+							<string>CFBundleShortVersionString</string>
+						</dict>
+					</array>
 				</dict>
 			</dict>
 		</dict>
