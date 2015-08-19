@@ -113,6 +113,17 @@
 			<string>Copier</string>
 		</dict>
 		<dict>
+			<key>Processor</key>
+			<string>ModeChanger</string>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/universalTypeClient.pkg/Scripts/postinstall</string>
+				<key>mode</key>
+				<string>a+x</string>
+			</dict>
+		</dict>
+		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>destination_pkg</key>
