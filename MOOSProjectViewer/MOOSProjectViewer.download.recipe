@@ -17,9 +17,9 @@
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://www.moosprojectviewer.com/notificationDownload.php</string>
+				<string>http://www.moosprojectviewer.com/download.php</string>
 				<key>re_pattern</key>
-				<string>(?P&lt;url&gt;http://www.moosprojectviewer.com/downloads/MOOS-[0-9\.]*dmg)</string>
+				<string>(?P&lt;url_part&gt;downloads/MOOS-[0-9\.]*dmg)</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLTextSearcher</string>
@@ -27,6 +27,8 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>url</key>
+				<string>http://www.moosprojectviewer.com/%url_part%</string>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 			</dict>
