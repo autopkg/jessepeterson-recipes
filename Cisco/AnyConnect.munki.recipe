@@ -6,9 +6,9 @@
 	<string>Imports AnyConnect into Munki. Note this package works with newer flat packages. Also note it disables the Web Security module via installer choices XML.</string>
 	<key>Identifier</key>
 	<string>com.github.jessepeterson.munki.AnyConnect</string>
-	<key>Input</key>
 	<key>MinimumVersion</key>
 	<string>0.5.1</string>
+	<key>Input</key>
 	<dict>
 		<key>NAME</key>
 		<string>AnyConnect</string>
