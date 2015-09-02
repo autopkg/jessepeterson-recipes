@@ -7,6 +7,8 @@
 	<key>Identifier</key>
 	<string>com.github.jessepeterson.munki.AnyConnect</string>
 	<key>Input</key>
+	<key>MinimumVersion</key>
+	<string>0.5.1</string>
 	<dict>
 		<key>NAME</key>
 		<string>AnyConnect</string>
