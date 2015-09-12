@@ -11,7 +11,7 @@
 		<key>NAME</key>
 		<string>PDFpenPro</string>
 		<key>SPARKLE_FEED_URL</key>
-		<string>http://smilesoftware.com/appcast/PDFpenPro.xml</string>
+		<string>http://updates.smilesoftware.com/com.smileonmymac.PDFpenPro.xml</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
