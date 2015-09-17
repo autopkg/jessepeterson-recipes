@@ -30,7 +30,7 @@
 			<string>%NAME%</string>
 			<key>postinstall_script</key>
 			<string>#!/bin/sh
-			cp "/Applications/Hightail Desktop App.app/Contents/Resources/HightailOSAX.osax" /Library/ScriptingAdditions/
+			cp &quot;/Applications/Hightail Desktop App.app/Contents/Resources/HightailOSAX.osax&quot; /Library/ScriptingAdditions/
 			exit $?</string>
 			<key>postuninstall_script</key>
 			<string>#!/bin/sh
