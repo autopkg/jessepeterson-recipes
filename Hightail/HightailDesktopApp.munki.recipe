@@ -32,6 +32,10 @@
 			<string>#!/bin/sh
 			cp "/Applications/Hightail Desktop App.app/Contents/Resources/HightailOSAX.osax" /Library/ScriptingAdditions/
 			exit $?</string>
+			<key>postuninstall_script</key>
+			<string>#!/bin/sh
+			rm -rf /Library/ScriptingAdditions/HightailOSAX.osax
+			exit $?</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
