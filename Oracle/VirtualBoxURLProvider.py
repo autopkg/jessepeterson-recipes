@@ -39,6 +39,20 @@ class VirtualBoxURLProvider(Processor):
 
 	description = __doc__
 
+	def get_latest_file(self):
+		try:
+			f = urllib2.urlopen(LATEST_URL)
+			latest = f.readline().rstrip()
+			f.close()
+		except BaseException as e:
+			raise ProcessorError('Could not retrieve URL: %s' % LATEST_URL)
+
+		# lame! use RE some day
+		if '.' not in latest:
+			raise ProcessorError('Not a valid VirtualBox version: %s' % latest)
+
+		return latest
+
 	def get_latest(self):
 		'''Retrieve update check URL, parse, and return the current version
 		number of the current VirtualBox. E.g. "4.23.16"
@@ -93,7 +107,7 @@ class VirtualBoxURLProvider(Processor):
 		return (vb_url, ext_url, )
 
 	def main(self):
-		self.env['virtualbox_version'] = self.get_latest()
+		self.env['virtualbox_version'] = self.get_latest_file()
 		self.output('Latest is %s' % self.env['virtualbox_version'])
 
 		self.env['virtualbox_url'], self.env['extpack_url'] = \
