@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ParentRecipe</key>
+	<string>com.github.autopkg.jessepeterson-recipes.AppStorePkg</string>
+	<key>Identifier</key>
+	<string>com.github.autopkg.jessepeterson-recipes.AppStorePkg.BlackmagicDiskSpeedTest</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>BlackmagicDiskSpeedTest</string>
+		<key>APP_NAME</key>
+		<string>Blackmagic Disk Speed Test.app</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>generic/MASapps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Utilities</string>
+		<key>MUNKI_DEVELOPER</key>
+		<string>Blackmagic Design Inc</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
+			<key>display_name</key>
+			<string>Blackmagic Disk Speed Test</string>
+			<key>developer</key>
+			<string>%MUNKI_DEVELOPER%</string>
+			<key>description</key>
+			<string>Disk Speed Test is an easy to use tool to quickly measure and certify your disk performance for working with high quality video! Simply click the start button and Disk Speed Test will write test your disk using large blocks of data, and then display the result. Disk Speed Test will continue to test writes and reads from your disk so you can evaluate both performance and readability over time.</string>
+			<key>unattended_install</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
