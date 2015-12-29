@@ -14,8 +14,6 @@
 		<string>apps</string>
 		<key>NAME</key>
 		<string>UniversalTypeClient6</string>
-		<key>MUNKI_UNINSTALL</key>
-		<string>UniversalTypeClient.uninstall.sh</string>
 		<key>PKG_POSTINSTALL</key>
 		<string>UniversalTypeClient5.postinstall</string>
 		<key>pkginfo</key>
@@ -223,12 +221,36 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 			<string>PathDeleter</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>FindResource</string>
 			<key>Arguments</key>
 			<dict>
+				<key>url</key>
+				<string>http://s3.amazonaws.com/cs.us.extensis.com/fm_uninstall/utc/utc-removal-tool.zip</string>
 				<key>filename</key>
-				<string>%MUNKI_UNINSTALL%</string>
+				<string>utc-removal-tool.zip</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>archive_path</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/utc-removal-tool.zip</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%-removal-tool</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+			<key>Processor</key>
+			<string>Unarchiver</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%-removal-tool/*.command</string>
 			</dict>
 		</dict>
 		<dict>
@@ -240,7 +262,7 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>additional_makepkginfo_options</key>
 				<array>
-					<string>--uninstall_script=%found_resource%</string>
+					<string>--uninstall_script=%found_filename%</string>
 				</array>
 			</dict>
 			<key>Processor</key>
