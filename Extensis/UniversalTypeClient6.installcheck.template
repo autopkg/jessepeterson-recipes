@@ -1,0 +1,76 @@
+#!/usr/bin/python
+import os
+import plistlib
+import sys
+from distutils.version import StrictVersion
+
+def get_plugin_vers(plugin_path):
+	plugin_pkginfo = "%s/Contents/Info.plist" % (plugin_path)
+	pl = plistlib.readPlist(plugin_pkginfo)
+	return ".".join(pl["CFBundleShortVersionString"].split(".")[:3])
+
+adobe_apps = dict(
+	Illustrator="Plug-ins.localized/Extensions.localized/ExtensisFontManagementAI_VERS_.aip",
+	InCopy="Plug-Ins/Font Activation/ExtensisFontManagementIC_VERS_.InDesignPlugin",
+	InDesign="Plug-Ins/Font Activation/ExtensisFontManagementID_VERS_.InDesignPlugin",
+	Photoshop="Plug-ins/Automate/ExtensisFontManagementPS_VERS_.plugin",
+	AfterEffects="Plug-ins/Extensions/ExtensisFontManagementAE_VERS_.plugin",
+)
+
+adobe_versions = ("CS6", "CC", "CC 2014", "CC 2015")
+
+quark_versions = ("7", "7.31", "7.5", "8", "9", "10", "2015")
+
+pkg_vers = "%version%"
+
+if not os.path.exists("/Applications/Universal Type Client.app"):
+	print "Universal Type Client.app not found, need to install."
+	sys.exit(0)
+
+else:
+	pl = plistlib.readPlist("/Applications/Universal Type Client.app/Contents/Info.plist")
+	installed_vers = pl["CFBundleShortVersionString"]
+	if StrictVersion(installed_vers) < StrictVersion(pkg_vers):
+		print "Found %s, lower version than %s" % (installed_vers, pkg_vers)
+		sys.exit(0)
+
+for name, plugin in adobe_apps.iteritems():
+	for vers in adobe_versions:
+		app_path = "/Applications/Adobe %s %s" % (name, vers)
+		if not os.path.exists(app_path):
+			print "%s not found, skipping" % (app_path)
+			continue
+		if vers == "CC":
+			vers = "CS7"
+		else:
+			vers = "".join(vers.split(" "))
+		plugin_path = "%s/%s" % (app_path, plugin)
+		plugin_path = plugin_path.replace("_VERS_", vers)
+		if not os.path.exists(plugin_path):
+			print "%s not found, need to install UTC" % (plugin_path)
+			sys.exit(0)
+		installed_vers = get_plugin_vers(plugin_path)
+		if StrictVersion(installed_vers) < StrictVersion(pkg_vers):
+			print "Found %s, lower version than %s" % (installed_vers, pkg_vers)
+			sys.exit(0)
+
+		print "Found %s with version %s" % (plugin_path, installed_vers)
+
+for vers in quark_versions:
+	app_path = "/Applications/QuarkXPress %s" % (vers)
+	if not os.path.exists(app_path):
+		print "%s not found, skipping" % (app_path)
+		continue
+	if vers[0] == '7':
+		vers = '7'
+	plugin_path = "%s/XTensions/ExtensisFontManagementQXT_VERS_.xnt" % (app_path)
+	plugin_path = plugin_path.replace("_VERS_", vers)
+	if not os.path.exists(plugin_path):
+		print "%s not found, need to install UTC" % (plugin_path)
+		sys.exit(0)
+	installed_vers = get_plugin_vers(plugin_path)
+	if StrictVersion(installed_vers) < StrictVersion(pkg_vers):
+		print "Found %s, lower version than %s" % (installed_vers, pkg_vers)
+		sys.exit(0)
+
+sys.exit(1)
