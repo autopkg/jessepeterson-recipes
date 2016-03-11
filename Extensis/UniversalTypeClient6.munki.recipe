@@ -14,6 +14,10 @@
 		<string>apps</string>
 		<key>NAME</key>
 		<string>UniversalTypeClient6</string>
+		<key>INSTALLCHECK_TEMPLATE</key>
+		<string>UniversalTypeClient6.installcheck.template</string>
+		<key>PKG_INSTALLCHECK</key>
+		<string>UniversalTypeClient6.installcheck</string>
 		<key>PKG_POSTINSTALL</key>
 		<string>UniversalTypeClient5.postinstall</string>
 		<key>pkginfo</key>
@@ -256,12 +260,35 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>template_path</key>
+				<string>%RECIPE_DIR%/%INSTALLCHECK_TEMPLATE%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_DIR%/%PKG_INSTALLCHECK%</string>
+				<key>version</key>
+				<string>%version%</string>
+			</dict>
+			<key>Processor</key>
+			<string>com.github.scriptingosx.SharedProcessors/FileTemplate</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FindResource</string>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%PKG_INSTALLCHECK%</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
 				<key>pkg_path</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%.pkg</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>additional_makepkginfo_options</key>
 				<array>
+					<string>--installcheck_script=%found_resource%</string>
 					<string>--uninstall_script=%found_filename%</string>
 				</array>
 			</dict>
