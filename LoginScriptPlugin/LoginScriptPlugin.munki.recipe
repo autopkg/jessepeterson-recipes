@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ParentRecipe</key>
+	<string>com.github.autopkg.jessepeterson-recipes.download.LoginScriptPlugin</string>
+	<key>Description</key>
+	<string>Imports LoginScriptPlugin into Munki</string>
+	<key>Identifier</key>
+	<string>com.github.autopkg.jessepeterson-recipes.munki.LoginScriptPlugin</string>
+	<key>Input</key>
+	<dict>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>utilities</string>
+		<key>NAME</key>
+		<string>LoginScriptPlugin</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>display_name</key>
+			<string>Login Script Plugin</string>
+			<key>description</key>
+			<string>Support software for running computer management utilities at user login.</string>
+			<key>minimum_os_version</key>
+			<string>10.7.0</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>flat_pkg_path</key>
+				<string>%pathname%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>LoginScriptPluginUninstallCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>script_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/LoginScriptPlugin.pkg/Scripts/configureplugin.sh</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>--uninstall_script=%RECIPE_CACHE_DIR%/unpack/LoginScriptPlugin.pkg/Scripts/configureplugin.sh</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
