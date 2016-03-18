@@ -39,6 +39,7 @@ class SourceForgeURLProvider(Processor):
 	description = __doc__
 
 	def get_sf_project_id(self, pname):
+		# borrowed from https://gist.github.com/homebysix/9468859a76ac82f1d121
 		try:
 			f = urllib2.urlopen(PROJECT_NAME_URL % pname)
 			raw_json = f.read()
