@@ -24,6 +24,8 @@
 			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>The most powerful database and application development solution for small to medium businesses, on the desktop and client/server, Mac or Windows.</string>
+			<key>display_name</key>
+			<string>4D</string>
 			<key>developer</key>
 			<string>4D SAS</string>
 			<key>blocking_applications</key>
