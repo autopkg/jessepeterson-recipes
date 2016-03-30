@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Packages 4D for Munki</string>
+	<key>Identifier</key>
+	<string>com.github.autopkg.jessepeterson-recipes.munki.4d</string>
+	<key>ParentRecipe</key>
+	<string>com.github.autopkg.jessepeterson-recipes.download.4d</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>4D</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Databases</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
+			<key>description</key>
+			<string>The most powerful database and application development solution for small to medium businesses, on the desktop and client/server, Mac or Windows.</string>
+			<key>developer</key>
+			<string>4D SAS</string>
+			<key>blocking_applications</key>
+			<array>
+				<string>4D</string>
+			</array>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>unattended_install</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%pathname%/4D v*/4D.app</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%version%</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>version_comparison_key</key>
+				<string>CFBundleVersion</string>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>--itemname=%dmg_found_filename%</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

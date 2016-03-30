@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads 4D</string>
+	<key>Identifier</key>
+	<string>com.github.autopkg.jessepeterson-recipes.download.4d</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>4D</string>
+		<key>PRODUCT_URL</key>
+		<string>http://www.4d.com/downloads/products.html</string>
+		<key>DOWNLOAD_RE</key>
+		<string>(?P&lt;url&gt;http://download.4d.com/Products/Current/4D.*/Installers/4D.*v(?P&lt;version&gt;[0-9\.]+).*Mac.dmg)</string>
+	</dict>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>%DOWNLOAD_RE%</string>
+				<key>url</key>
+				<string>%PRODUCT_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>4D.dmg</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+	</array>
+</dict>
+</plist>
