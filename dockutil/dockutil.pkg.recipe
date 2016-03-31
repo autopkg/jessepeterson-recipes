@@ -68,6 +68,16 @@
 							<key>user</key>
 							<string>root</string>
 						</dict>
+						<dict>
+                                                        <key>path</key>
+                                                        <string>usr/local/bin/dockutil</string>
+                                                        <key>user</key>
+                                                        <string>root</string>
+							<key>group</key>
+							<string>wheel</string>
+							<key>mode</key>
+							<string>0755</string>
+						</dict>
 					</array>
 					<key>id</key>
 					<string>com.github.raw.dockutil</string>
