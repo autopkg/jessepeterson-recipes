@@ -85,9 +85,9 @@ rm -rf /Applications/ImageJ
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://rsbweb.nih.gov/ij/download.html</string>
+				<string>http://wsr.imagej.net/distros/osx/</string>
 				<key>re_pattern</key>
-				<string>download/osx/ImageJ[0-9]*\.zip</string>
+				<string>ImageJ[0-9]*\.zip</string>
 			</dict>
 		</dict>
 		<dict>
@@ -96,7 +96,7 @@ rm -rf /Applications/ImageJ
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://mirror.imagej.net/%match%</string>
+				<string>http://wsr.imagej.net/distros/osx/%match%</string>
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 			</dict>
