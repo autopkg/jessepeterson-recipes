@@ -4,6 +4,9 @@ import plistlib
 import sys
 from distutils.version import StrictVersion
 
+UP_TO_DATE  = 1
+OUT_OF_DATE = 0
+
 def get_plugin_vers(plugin_path):
 	plugin_pkginfo = "%s/Contents/Info.plist" % (plugin_path)
 	pl = plistlib.readPlist(plugin_pkginfo)
@@ -25,14 +28,14 @@ pkg_vers = "%version%"
 
 if not os.path.exists("/Applications/Universal Type Client.app"):
 	print "Universal Type Client.app not found, need to install."
-	sys.exit(0)
+	sys.exit(OUT_OF_DATE)
 
 else:
 	pl = plistlib.readPlist("/Applications/Universal Type Client.app/Contents/Info.plist")
 	installed_vers = pl["CFBundleShortVersionString"]
 	if StrictVersion(installed_vers) < StrictVersion(pkg_vers):
 		print "Found %s, lower version than %s" % (installed_vers, pkg_vers)
-		sys.exit(0)
+		sys.exit(OUT_OF_DATE)
 
 for name, plugin in adobe_apps.iteritems():
 	for vers in adobe_versions:
@@ -48,11 +51,11 @@ for name, plugin in adobe_apps.iteritems():
 		plugin_path = plugin_path.replace("_VERS_", vers)
 		if not os.path.exists(plugin_path):
 			print "%s not found, need to install UTC" % (plugin_path)
-			sys.exit(0)
+			sys.exit(OUT_OF_DATE)
 		installed_vers = get_plugin_vers(plugin_path)
 		if StrictVersion(installed_vers) < StrictVersion(pkg_vers):
 			print "Found %s, lower version than %s" % (installed_vers, pkg_vers)
-			sys.exit(0)
+			sys.exit(OUT_OF_DATE)
 
 		print "Found %s with version %s" % (plugin_path, installed_vers)
 
@@ -67,10 +70,10 @@ for vers in quark_versions:
 	plugin_path = plugin_path.replace("_VERS_", vers)
 	if not os.path.exists(plugin_path):
 		print "%s not found, need to install UTC" % (plugin_path)
-		sys.exit(0)
+		sys.exit(OUT_OF_DATE)
 	installed_vers = get_plugin_vers(plugin_path)
 	if StrictVersion(installed_vers) < StrictVersion(pkg_vers):
 		print "Found %s, lower version than %s" % (installed_vers, pkg_vers)
-		sys.exit(0)
+		sys.exit(OUT_OF_DATE)
 
-sys.exit(1)
+sys.exit(UP_TO_DATE)
