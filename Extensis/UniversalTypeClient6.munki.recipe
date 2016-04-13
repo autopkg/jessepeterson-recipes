@@ -260,8 +260,17 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>filename</key>
+				<string>%INSTALLCHECK_TEMPLATE%</string>
+			</dict>
+			<key>Processor</key>
+			<string>com.github.autopkg.robperc.recipes.Processors/FindResource</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
 				<key>template_path</key>
-				<string>%RECIPE_DIR%/%INSTALLCHECK_TEMPLATE%</string>
+				<string>%found_resource%</string>
 				<key>destination_path</key>
 				<string>%RECIPE_DIR%/%PKG_INSTALLCHECK%</string>
 				<key>version</key>
