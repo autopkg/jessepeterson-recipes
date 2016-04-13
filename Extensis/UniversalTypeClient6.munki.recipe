@@ -264,7 +264,7 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 				<string>%INSTALLCHECK_TEMPLATE%</string>
 			</dict>
 			<key>Processor</key>
-			<string>com.github.autopkg.robperc.recipes.Processors/FindResource</string>
+			<string>FindResource</string>
 		</dict>
 		<dict>
 			<key>Arguments</key>
@@ -272,21 +272,12 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 				<key>template_path</key>
 				<string>%found_resource%</string>
 				<key>destination_path</key>
-				<string>%RECIPE_DIR%/%PKG_INSTALLCHECK%</string>
+				<string>%RECIPE_CACHE_DIR%/%PKG_INSTALLCHECK%</string>
 				<key>version</key>
 				<string>%version%</string>
 			</dict>
 			<key>Processor</key>
 			<string>com.github.scriptingosx.SharedProcessors/FileTemplate</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>FindResource</string>
-			<key>Arguments</key>
-			<dict>
-				<key>filename</key>
-				<string>%PKG_INSTALLCHECK%</string>
-			</dict>
 		</dict>
 		<dict>
 			<key>Arguments</key>
@@ -297,7 +288,7 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>additional_makepkginfo_options</key>
 				<array>
-					<string>--installcheck_script=%found_resource%</string>
+					<string>--installcheck_script=%RECIPE_CACHE_DIR%/%PKG_INSTALLCHECK%</string>
 					<string>--uninstall_script=%found_filename%</string>
 				</array>
 			</dict>
