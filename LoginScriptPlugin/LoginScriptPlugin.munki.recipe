@@ -47,11 +47,33 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/unpack/LoginScriptPlugin.pkg/Scripts/postinstall</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>LoginScriptPluginUninstallCreator</string>
 			<key>Arguments</key>
 			<dict>
 				<key>script_path</key>
 				<string>%RECIPE_CACHE_DIR%/unpack/LoginScriptPlugin.pkg/Scripts/configureplugin.sh</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FlatPkgPacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>source_flatpkg_dir</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
+				<key>destination_pkg</key>
+				<string>%pathname%</string>
 			</dict>
 		</dict>
 		<dict>
