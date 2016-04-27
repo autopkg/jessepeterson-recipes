@@ -58,6 +58,24 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
+			<string>FileCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>file_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/LoginScriptPlugin.pkg/Scripts/postinstall</string>
+				<key>file_mode</key>
+				<string>0755</string>
+				<key>file_content</key>
+				<string>#!/bin/bash
+
+# Configure the authorization db to enable the plugin.
+./configureplugin.sh enable
+
+exit 0</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>LoginScriptPluginUninstallCreator</string>
 			<key>Arguments</key>
 			<dict>
