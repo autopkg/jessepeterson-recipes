@@ -73,7 +73,7 @@
 				<key>source_flatpkg_dir</key>
 				<string>%RECIPE_CACHE_DIR%/unpack</string>
 				<key>destination_pkg</key>
-				<string>%pathname%</string>
+				<string>%RECIPE_CACHE_DIR%/repack</string>
 			</dict>
 		</dict>
 		<dict>
