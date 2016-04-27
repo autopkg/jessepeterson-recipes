@@ -47,6 +47,35 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/unpack/LoginScriptPlugin.pkg/Scripts/postinstall</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FileCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>file_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/LoginScriptPlugin.pkg/Scripts/postinstall</string>
+				<key>file_mode</key>
+				<string>0755</string>
+				<key>file_content</key>
+				<string>#!/bin/bash
+
+# Configure the authorization db to enable the plugin.
+./configureplugin.sh enable
+
+exit 0</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>LoginScriptPluginUninstallCreator</string>
 			<key>Arguments</key>
 			<dict>
@@ -56,11 +85,22 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
+			<string>FlatPkgPacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>source_flatpkg_dir</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
+				<key>destination_pkg</key>
+				<string>%RECIPE_CACHE_DIR%/LoginScriptPlugin.pkg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>MunkiImporter</string>
 			<key>Arguments</key>
 			<dict>
 				<key>pkg_path</key>
-				<string>%pathname%</string>
+				<string>%RECIPE_CACHE_DIR%/LoginScriptPlugin.pkg</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>additional_makepkginfo_options</key>
