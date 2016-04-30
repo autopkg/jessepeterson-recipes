@@ -22,21 +22,6 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>MunkiInstallsItemsCreator</string>
-			<key>Arguments</key>
-			<dict>
-				<key>installs_item_paths</key>
-				<array>
-					<string>/Applications/%APP_NAME%</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>MunkiPkginfoMerger</string>
-		</dict>
-		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>additional_pkginfo</key>
@@ -64,6 +49,11 @@ cat /dev/null &gt; &quot;/Applications/%APP_NAME%/Contents/_MASReceipt/receipt&q
 			<dict>
 				<key>pkg_path</key>
 				<string>%PKG%</string>
+				<key>additional_makepkginfo_options</key>
+				<array>
+					<string>-f</string>
+					<string>/Applications/%APP_NAME%</string>
+				</array>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
 			</dict>
