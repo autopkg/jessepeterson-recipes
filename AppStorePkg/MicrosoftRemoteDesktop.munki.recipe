@@ -11,7 +11,7 @@
 		<key>NAME</key>
 		<string>MicrosoftRemoteDesktop</string>
 		<key>APP_NAME</key>
-		<string>MicrosoftRemoteDesktop.app</string>
+		<string>Microsoft Remote Desktop.app</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>generic/MASapps</string>
 		<key>MUNKI_CATEGORY</key>
