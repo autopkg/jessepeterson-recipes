@@ -8,7 +8,7 @@ from autopkglib import Processor, ProcessorError
 
 __all__ = ["VMwareToolsURLProvider"]
 
-FUSION_URL_BASE = 'http://softwareupdate.vmware.com/cds/vmw-desktop/'
+FUSION_URL_BASE = 'https://softwareupdate.vmware.com/cds/vmw-desktop/'
 DARWIN_TOOLS_URL_APPEND = 'packages/com.vmware.fusion.tools.darwin.zip.tar'
 DEFAULT_VERSION_SERIES = '8.0.0'
 
@@ -74,4 +74,3 @@ class VMwareToolsURLProvider(Processor):
 
 		self.env['url'] = self.get_url(version_series)
 		self.output('File URL %s' % self.env['url'])
-
