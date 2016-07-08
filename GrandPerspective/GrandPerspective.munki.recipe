@@ -4,75 +4,11 @@
 <dict>
 	<key>Description</key>
 	<string>Downloads GrandPerspective and imports into Munki.</string>
+	<key>ParentRecipe</key>
+	<string>com.github.homebysix.munki.GrandPerspective</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.GrandPerspective</string>
 	<key>Input</key>
-	<dict>
-		<key>IDENTIFIER</key>
-		<string>com.github.jessepeterson.munki.GrandPerspective</string>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps</string>
-		<key>MUNKI_CATEGORY</key>
-		<string>Utilities</string>
-		<key>NAME</key>
-		<string>GrandPerspective</string>
-		<key>SOURCEFORGE_FILE_PATTERN</key>
-		<string>GrandPerspective-[0-9_\.]*\.dmg</string>
-		<key>SOURCEFORGE_PROJECT_NAME</key>
-		<string>grandperspectiv</string>
-		<key>APP_DESTINATION</key>
-		<string>/Applications/Utilities</string>
-		<key>pkginfo</key>
-		<dict>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>category</key>
-			<string>%MUNKI_CATEGORY%</string>
-			<key>description</key>
-			<string>GrandPerspective is a small utility application for Mac OS X that graphically shows the disk usage within a file system. It can help you to manage your disk, as you can easily spot which files and folders take up the most space. It uses a so called tree map for visualisation. Each file is shown as a rectangle with an area proportional to the file&apos;s size. Files in the same folder appear together, but their placement is otherwise arbitrary.</string>
-			<key>developer</key>
-			<string>Erwin Bonsma</string>
-			<key>name</key>
-			<string>%NAME%</string>
-			<key>unattended_install</key>
-			<true/>
-		</dict>
-	</dict>
-	<key>Process</key>
-	<array>
-		<dict>
-			<key>Processor</key>
-			<string>SourceForgeURLProvider</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-			<key>Arguments</key>
-			<dict>
-				<key>filename</key>
-				<string>%NAME%.dmg</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_path</key>
-				<string>%pathname%</string>
-				<key>repo_subdirectory</key>
-				<string>%MUNKI_REPO_SUBDIR%</string>
-				<key>additional_makepkginfo_options</key>
-				<array>
-					<string>--destinationpath</string>
-					<string>%APP_DESTINATION%</string>
-				</array>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
-		</dict>
-	</array>
+	<dict/>
 </dict>
 </plist>
