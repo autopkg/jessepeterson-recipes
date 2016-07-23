@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads ClamXav and imports into Munki.</string>
+	<string>Imports ClamXav into Munki.</string>
+	<key>ParentRecipe</key>
+	<string>com.github.jessepeterson.download.ClamXav</string>
 	<key>Identifier</key>
 	<string>com.github.jessepeterson.munki.ClamXav</string>
 	<key>Input</key>
@@ -51,29 +53,14 @@ exit $?
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextSearcher</string>
+			<string>DmgCreator</string>
 			<key>Arguments</key>
 			<dict>
-				<key>url</key>
-				<string>http://www.clamxav.com/download.html</string>
-				<key>re_pattern</key>
-				<string>(?P&lt;urlpart&gt;/downloads/ClamXav\_[0-9\.]*dmg)</string>
+				<key>dmg_root</key>
+				<string>%RECIPE_CACHE_DIR%/unzip/ClamXav.app</string>
+				<key>dmg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
 			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-			<key>Arguments</key>
-			<dict>
-				<key>url</key>
-				<string>http://www.clamxav.com%urlpart%</string>
-				<key>filename</key>
-				<string>%NAME%.dmg</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
@@ -81,13 +68,9 @@ exit $?
 			<key>Arguments</key>
 			<dict>
 				<key>pkg_path</key>
-				<string>%pathname%</string>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
-				<key>additional_makepkginfo_options</key>
-				<array>
-					<string>--itemname=ClamXav.app</string>
-				</array>
 			</dict>
 		</dict>
 	</array>
