@@ -41,6 +41,26 @@
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
 		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>FileFinderPR263</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%pathname%/4D v*/4D.app</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+			<key>Arguments</key>
+			<dict>
+				<key>input_path</key>
+				<string>%pathname%/%dmg_found_filename%</string>
+				<key>requirement</key>
+				<string>identifier &quot;com.4d.4d&quot; and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = &quot;37UG5W39Z2&quot;</string>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

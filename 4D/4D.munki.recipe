@@ -44,11 +44,13 @@
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>FileFinder</string>
+			<string>Versioner</string>
 			<key>Arguments</key>
 			<dict>
-				<key>pattern</key>
-				<string>%pathname%/4D v*/4D.app</string>
+				<key>input_plist_path</key>
+				<string>%pathname%/%dmg_found_filename%/Contents/Info.plist</string>
+				<key>plist_version_key</key>
+				<string>CFBundleVersion</string>
 			</dict>
 		</dict>
 		<dict>
