@@ -3,7 +3,8 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads latest dockutil.</string>
+    <string>Downloads latest dockutil.
+    Note: code signature verification not possible on dockutil right now</string>
     <key>Identifier</key>
     <string>com.github.autopkg.jessepeterson.download.dockutil</string>
     <key>Input</key>
