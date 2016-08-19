@@ -13,10 +13,10 @@ pkginfo set according to the lowest OS version supported by the
 found driver download.</string>
 	<key>ParentRecipe</key>
 	<string>com.github.jessepeterson.download.CUDADriver</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.CUDADriver</string>
 	<key>Input</key>
 	<dict>
-		<key>IDENTIFIER</key>
-		<string>com.github.jessepeterson.munki.CUDADriver</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>drivers</string>
 		<key>MUNKI_CATEGORY</key>

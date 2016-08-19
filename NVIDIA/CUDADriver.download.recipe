@@ -4,10 +4,10 @@
 <dict>
 	<key>description</key>
 	<string>Downloads latest NVIDIA CUDA Driver.</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.download.CUDADriver</string>
 	<key>Input</key>
 	<dict>
-		<key>IDENTIFIER</key>
-		<string>com.github.jessepeterson.download.CUDADriver</string>
 		<key>MAJOR_OS_VERSION</key>
 		<string>10.10</string>
 		<key>NAME</key>

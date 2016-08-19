@@ -4,10 +4,10 @@
 <dict>
 	<key>Description</key>
 	<string>Downloads GrandPerspective and imports into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.GrandPerspective</string>
 	<key>Input</key>
 	<dict>
-		<key>IDENTIFIER</key>
-		<string>com.github.jessepeterson.munki.GrandPerspective</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>

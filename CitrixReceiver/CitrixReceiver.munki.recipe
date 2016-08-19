@@ -4,12 +4,12 @@
 <dict>
 	<key>description</key>
 	<string>Downloads Citrix Receiver and imports into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.munki.CitrixReceiver</string>
 	<key>Input</key>
 	<dict>
 		<key>DOWNLOAD_URL</key>
 		<string>http://downloadplugins.citrix.com.edgesuite.net/Mac/CitrixReceiverWeb.dmg</string>
-		<key>IDENTIFIER</key>
-		<string>com.github.jessepeterson.munki.CitrixReceiver</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>internet_plugins</string>
 		<key>MUNKI_CATEGORY</key>
