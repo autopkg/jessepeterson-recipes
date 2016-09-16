@@ -74,7 +74,7 @@
 				</dict>
 				<dict>
 					<key>attributeSetting</key>
-					<integer>0</integer>
+					<integer>1</integer>
 					<key>choiceAttribute</key>
 					<string>selected</string>
 					<key>choiceIdentifier</key>
@@ -82,7 +82,7 @@
 				</dict>
 				<dict>
 					<key>attributeSetting</key>
-					<integer>0</integer>
+					<integer>1</integer>
 					<key>choiceAttribute</key>
 					<string>selected</string>
 					<key>choiceIdentifier</key>
@@ -161,8 +161,6 @@
 					<string>com.cisco.pkg.anyconnect.dart</string>
 					<string>com.cisco.pkg.anyconnect.websecurity_v2</string>
 					<string>com.cisco.pkg.anyconnect.fireamp</string>
-					<string>com.cisco.pkg.anyconnect.posture</string>
-					<string>com.cisco.pkg.anyconnect.iseposture</string>
 					<string>com.cisco.pkg.anyconnect.nvm_v2</string>
 					<string>com.cisco.pkg.anyconnect.umbrella</string>
 				</array>
