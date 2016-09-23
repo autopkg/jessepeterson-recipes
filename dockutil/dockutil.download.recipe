@@ -11,7 +11,7 @@
         <key>NAME</key>
         <string>dockutil</string>
         <key>DOCKUTIL_URL</key>
-        <string>https://raw.github.com/kcrawford/dockutil/master/scripts/dockutil</string>
+        <string>https://github.com/kcrawford/dockutil/releases/latest</string>
     </dict>
     <key>MinimumVersion</key>
     <string>0.2.3</string>
@@ -25,7 +25,7 @@
                 <key>url</key>
                 <string>%DOCKUTIL_URL%</string>
                 <key>re_pattern</key>
-                <string>version\s=\s&apos;(?P&lt;version&gt;[0-9\.]*)&apos;</string>
+                <string>(?P&lt;relativepath&gt;\/kcrawford\/dockutil\/releases\/download\/(?P&lt;version&gt;.*?)\/dockutil-.*?\.pkg)</string>
             </dict>		
         </dict>
         <dict>
@@ -34,7 +34,7 @@
             <key>Arguments</key>
             <dict>
                 <key>url</key>
-                <string>%DOCKUTIL_URL%</string>
+                <string>https://github.com/%relativepath%</string>
                 <key>filename</key>
                 <string>%NAME%</string>
             </dict>
