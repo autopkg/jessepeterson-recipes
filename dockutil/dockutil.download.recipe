@@ -3,40 +3,34 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads latest dockutil.</string>
+    <string>Downloads the current release of Dockutil from Github.</string>
     <key>Identifier</key>
     <string>com.github.autopkg.jessepeterson.download.dockutil</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
         <string>dockutil</string>
-        <key>DOCKUTIL_URL</key>
-        <string>https://github.com/kcrawford/dockutil/releases/latest</string>
     </dict>
     <key>MinimumVersion</key>
-    <string>0.2.3</string>
+    <string>0.2.0</string>
     <key>Process</key>
     <array>
         <dict>
             <key>Processor</key>
-            <string>URLTextSearcher</string>
+            <string>GitHubReleasesInfoProvider</string>
             <key>Arguments</key>
             <dict>
-                <key>url</key>
-                <string>%DOCKUTIL_URL%</string>
-                <key>re_pattern</key>
-                <string>(?P&lt;relativepath&gt;\/kcrawford\/dockutil\/releases\/download\/(?P&lt;version&gt;.*?)\/dockutil-.*?\.pkg)</string>
-            </dict>		
+                <key>github_repo</key>
+                <string>kcrawford/dockutil</string>
+            </dict>
         </dict>
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
             <key>Arguments</key>
             <dict>
-                <key>url</key>
-                <string>https://github.com/%relativepath%</string>
                 <key>filename</key>
-                <string>%NAME%</string>
+                <string>%NAME%.pkg</string>
             </dict>
         </dict>
         <dict>
