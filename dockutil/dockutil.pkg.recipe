@@ -3,93 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Packages the dockutil download.  Install directory /usr/local/bin</string>
+	<string>Empty recipe that simply uses the download recipe (as it downloads a pkg)</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.jessepeterson.pkg.dockutil</string>
-	<key>Input</key>
-	<dict>
-		<key>NAME</key>
-		<string>dockutil</string>
-		<key>pkginfo</key>
-		<dict>
-			<key>name</key>
-			<string>%NAME%</string>
-		</dict>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>0.2.9</string>
 	<key>ParentRecipe</key>
 	<string>com.github.autopkg.jessepeterson.download.dockutil</string>
-	<key>Process</key>
-	<array>
-		<dict>
-			<key>Processor</key>
-			<string>PkgRootCreator</string>
-			<key>Arguments</key>
-			<dict>
-				<key>pkgroot</key>
-				<string>%RECIPE_CACHE_DIR%/dockutil</string>
-				<key>pkgdirs</key>
-				<dict>
-					<key>usr</key>
-					<string>0775</string>
-                                        <key>usr/local</key>
-                                        <string>0775</string>
-                                        <key>usr/local/bin</key>
-                                        <string>0775</string>
-				</dict>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>Copier</string>
-			<key>Arguments</key>
-			<dict>
-				<key>destination_path</key>
-				<string>%pkgroot%/usr/local/bin/%NAME%</string>
-				<key>source_path</key>
-				<string>%RECIPE_CACHE_DIR%/downloads/%NAME%</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>PkgCreator</string>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_request</key>
-				<dict>
-					<key>chown</key>
-					<array>
-						<dict>
-							<key>group</key>
-							<string>admin</string>
-							<key>path</key>
-							<string>usr</string>
-							<key>user</key>
-							<string>root</string>
-						</dict>
-						<dict>
-                                                        <key>path</key>
-                                                        <string>usr/local/bin/dockutil</string>
-                                                        <key>user</key>
-                                                        <string>root</string>
-							<key>group</key>
-							<string>wheel</string>
-							<key>mode</key>
-							<string>0755</string>
-						</dict>
-					</array>
-					<key>id</key>
-					<string>com.github.raw.dockutil</string>
-					<key>options</key>
-					<string>purge_ds_store</string>
-					<key>pkgdir</key>
-					<string>%RECIPE_CACHE_DIR%</string>
-				</dict>
-				<key>pkgname</key>
-				<string>%NAME%-%version%</string>
-			</dict>
-		</dict>
-	</array>
+	<key>Input</key>
+	<dict/>
 </dict>
 </plist>
