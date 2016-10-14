@@ -11,7 +11,7 @@
 		<key>NAME</key>
 		<string>Viscosity</string>
 		<key>DOWNLOAD_URL</key>
-		<string>http://www.sparklabs.com/downloads/Viscosity.dmg</string>
+		<string>https://www.sparklabs.com/downloads/Viscosity.dmg</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
