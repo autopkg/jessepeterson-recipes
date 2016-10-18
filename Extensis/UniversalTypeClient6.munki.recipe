@@ -288,8 +288,11 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 				<string>%MUNKI_REPO_SUBDIR%</string>
 				<key>additional_makepkginfo_options</key>
 				<array>
-					<string>--installcheck_script=%RECIPE_CACHE_DIR%/%PKG_INSTALLCHECK%</string>
 					<string>--uninstall_script=%found_filename%</string>
+				</array>
+				<key>_additional_makepkginfo_options</key>
+				<array>
+					<string>--installcheck_script=%RECIPE_CACHE_DIR%/%PKG_INSTALLCHECK%</string>
 				</array>
 			</dict>
 			<key>Processor</key>
