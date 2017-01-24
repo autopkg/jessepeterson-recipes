@@ -130,7 +130,7 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>Copier</string>
+			<string>CopierPR314</string>
 			<key>Arguments</key>
 			<dict>
 				<key>source_path</key>
