@@ -43,7 +43,7 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>FileFinderPR263</string>
+			<string>FileFinder</string>
 			<key>Arguments</key>
 			<dict>
 				<key>pattern</key>

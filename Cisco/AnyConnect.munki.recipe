@@ -79,7 +79,7 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>CopierPR314</string>
+			<string>Copier</string>
 			<key>Arguments</key>
 			<dict>
 				<key>source_path</key>
