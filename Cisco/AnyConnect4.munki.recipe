@@ -161,6 +161,7 @@
 					<string>com.cisco.pkg.anyconnect.dart</string>
 					<string>com.cisco.pkg.anyconnect.websecurity_v2</string>
 					<string>com.cisco.pkg.anyconnect.fireamp</string>
+					<string>com.cisco.pkg.anyconnect.iseposture</string>
 					<string>com.cisco.pkg.anyconnect.nvm_v2</string>
 					<string>com.cisco.pkg.anyconnect.umbrella</string>
 				</array>
