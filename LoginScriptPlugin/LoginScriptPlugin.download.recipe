@@ -2,44 +2,59 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Identifier</key>
-	<string>com.github.autopkg.jessepeterson-recipes.download.LoginScriptPlugin</string>
 	<key>Description</key>
 	<string>Downloads LoginScriptPlugin</string>
+	<key>Identifier</key>
+	<string>com.github.autopkg.jessepeterson-recipes.download.LoginScriptPlugin</string>
 	<key>Input</key>
 	<dict>
-		<key>NAME</key>
-		<string>LoginScriptPlugin</string>
 		<key>GITHUB_REPO</key>
 		<string>MagerValp/LoginScriptPlugin</string>
+		<key>NAME</key>
+		<string>LoginScriptPlugin</string>
 	</dict>
 	<key>Process</key>
 	<array>
 		<dict>
-			<key>Processor</key>
-			<string>GitHubReleasesInfoProvider</string>
 			<key>Arguments</key>
 			<dict>
-				<key>github_repo</key>
-				<string>%GITHUB_REPO%</string>
 				<key>asset_regex</key>
 				<string>.*pkg</string>
+				<key>github_repo</key>
+				<string>%GITHUB_REPO%</string>
 				<key>include_prereleases</key>
 				<true/>
 			</dict>
+			<key>Processor</key>
+			<string>GitHubReleasesInfoProvider</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
 				<string>%NAME%.pkg</string>
 			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>expected_authority_names</key>
+				<array>
+					<string>Developer ID Installer: University of Gothenburg</string>
+					<string>Developer ID Certification Authority</string>
+					<string>Apple Root CA</string>
+				</array>
+				<key>input_path</key>
+				<string>%pathname%</string>
+			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
 		</dict>
 	</array>
 </dict>
