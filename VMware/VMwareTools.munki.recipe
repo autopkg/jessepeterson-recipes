@@ -34,6 +34,8 @@ Other tools in the package support synchronization of time in the guest operatin
 			<array>
 				<string>testing</string>
 			</array>
+			<key>minimum_os_version</key>
+			<string>10.11</string>
 		</dict>
 	</dict>
 	<key>Process</key>
