@@ -15,22 +15,11 @@
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextSearcher</string>
-			<key>Arguments</key>
-			<dict>
-				<key>url</key>
-				<string>https://www.clamxav.com/download.html</string>
-				<key>re_pattern</key>
-				<string>(?P&lt;urlpart&gt;/downloads/ClamXav\_[0-9\.\_]*zip)</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
 			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://www.clamxav.com%urlpart%</string>
+				<string>https://www.clamxav.com/downloads/ClamXav_Current.zip</string>
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 			</dict>
