@@ -228,7 +228,7 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://s3.amazonaws.com/cs.us.extensis.com/fm_uninstall/utc/utc-removal-tool.zip</string>
+				<string>http://cs.us.extensis.com.s3.amazonaws.com/fm_uninstall/utc/UT-removal-tool.zip</string>
 				<key>filename</key>
 				<string>utc-removal-tool.zip</string>
 			</dict>
