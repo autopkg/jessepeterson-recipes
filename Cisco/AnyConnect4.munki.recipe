@@ -122,7 +122,7 @@
 				<string>%PKG%/*.pkg</string>
 				<key>expected_authority_names</key>
 				<array>
-					<string>Developer ID Installer: Cisco/</string>
+					<string>Developer ID Installer: Cisco Systems, Inc. (TDNYQP7VRK)</string>
 					<string>Developer ID Certification Authority</string>
 					<string>Apple Root CA</string>
 				</array>
