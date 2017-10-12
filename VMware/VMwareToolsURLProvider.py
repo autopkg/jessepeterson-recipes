@@ -10,7 +10,7 @@ __all__ = ["VMwareToolsURLProvider"]
 
 FUSION_URL_BASE = 'https://softwareupdate.vmware.com/cds/vmw-desktop/'
 DARWIN_TOOLS_URL_APPEND = 'packages/com.vmware.fusion.tools.darwin.zip.tar'
-DEFAULT_VERSION_SERIES = '8.0.0'
+DEFAULT_VERSION_SERIES = '10.0.0'
 
 class VMwareToolsURLProvider(Processor):
 	'''Provides URL to the latest Darwin ISO of the VMware Fusion tools.'''
@@ -18,7 +18,7 @@ class VMwareToolsURLProvider(Processor):
 	input_variables = {
 		'VERSION_SERIES': {
 			'required': False,
-			'description': 'Version of VMware Fusion to target tools of. E.g. "8.0.0". Defaults to "8.0.0"',
+			'description': 'Version of VMware Fusion to target tools of. E.g. "10.0.0". Defaults to "10.0.0"',
 			},
 	}
 	output_variables = {
