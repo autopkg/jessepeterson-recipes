@@ -18,7 +18,7 @@ class VMwareToolsURLProvider(Processor):
 	input_variables = {
 		'VERSION_SERIES': {
 			'required': False,
-			'description': 'Version of VMware Fusion to target tools of. E.g. "8.0.0". Defaults to "8.0.0"',
+			'description': 'Version of VMware Fusion to target tools of. E.g. "10.0.0". Defaults to "10.0.0"',
 			},
 	}
 	output_variables = {
