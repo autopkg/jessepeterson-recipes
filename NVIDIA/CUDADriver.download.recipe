@@ -46,7 +46,7 @@
 				<string>%pathname%/CUDADriver.pkg</string>
 				<key>expected_authority_names</key>
 				<array>
-					<string>Developer ID Installer: NVIDIA Corporation</string>
+					<string>Developer ID Installer: NVIDIA Corporation (6KR3T733EC)</string>
 					<string>Developer ID Certification Authority</string>
 					<string>Apple Root CA</string>
 				</array>
