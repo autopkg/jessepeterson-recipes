@@ -63,7 +63,7 @@
 				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg/Install Code42 CrashPlan.pkg</string>
 				<key>expected_authority_names</key>
 				<array>
-					<string>Developer ID Installer: Code 42 Software</string>
+					<string>Developer ID Installer: Code 42 Software (9YV9435DHD)</string>
 					<string>Developer ID Certification Authority</string>
 					<string>Apple Root CA</string>
 				</array>
