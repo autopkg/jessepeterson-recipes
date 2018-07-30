@@ -21,7 +21,7 @@
 				<key>re_pattern</key>
 				<string>(?P&lt;url&gt;https://bin.extensis.com/UTC-6-[0-9\-]*-M\.zip)</string>
 				<key>url</key>
-				<string>https://www.extensis.com/support/product-support/universal-type-server-6/</string>
+				<string>https://www.extensis.com/support/universal-type-server-6/</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLTextSearcher</string>
