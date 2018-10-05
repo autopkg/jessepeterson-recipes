@@ -103,7 +103,7 @@ Other tools in the package support synchronization of time in the guest operatin
 				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg/Install VMware Tools.app/Contents/Resources/VMware Tools.pkg</string>
 				<key>expected_authority_names</key>
 				<array>
-					<string>Developer ID Application: VMware, Inc. (EG7KH642X6)</string>
+					<string>Developer ID Installer: VMware, Inc. (EG7KH642X6)</string>
 					<string>Developer ID Certification Authority</string>
 					<string>Apple Root CA</string>
 				</array>
