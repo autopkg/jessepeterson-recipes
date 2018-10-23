@@ -19,7 +19,7 @@
 		<key>PKG_INSTALLCHECK</key>
 		<string>UniversalTypeClient7.installcheck</string>
 		<key>PKG_POSTINSTALL</key>
-		<string>UniversalTypeClient5.postinstall</string>
+		<string>UniversalTypeClient7.postinstall</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
