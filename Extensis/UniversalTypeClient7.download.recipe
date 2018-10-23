@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads, Extensis Universal Type Client 6.</string>
+	<key>Identifier</key>
+	<string>com.github.jessepeterson.download.UniversalTypeClient6</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>UniversalTypeClient6</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.3</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>(?P&lt;url&gt;https://bin.extensis.com/UTC-7-[0-9\-]*-M\.zip)</string>
+				<key>url</key>
+				<string>https://www.extensis.com/support/universal-type-server-7/</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%NAME%.zip</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+	</array>
+</dict>
+</plist>
