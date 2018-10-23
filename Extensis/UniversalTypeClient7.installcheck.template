@@ -31,7 +31,8 @@ adobe_versions = ("CC 2017", "CC 2018", "CC 2019")
 
 quark_versions = ("2016", "2017", "2018")
 
-pkg_vers = "%version%"
+#pkg_vers = "%version%"
+pkg_vers = "6.1.7"
 
 if not os.path.exists("/Applications/Universal Type Client.app"):
     print "Universal Type Client.app not found, need to install."
