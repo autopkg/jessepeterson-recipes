@@ -45,7 +45,7 @@ Store all of your fonts in a centralized, server-based font manager to ensure co
 			<key>display_name</key>
 			<string>Universal Type Client</string>
 			<key>minimum_os_version</key>
-			<string>10.6</string>
+			<string>10.11</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>supported_architectures</key>
