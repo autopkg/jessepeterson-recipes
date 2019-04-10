@@ -18,6 +18,16 @@
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Networking</string>
+		<key>pkg_ids_set_optional_true</key>
+		<array>
+			<string>com.cisco.pkg.anyconnect.websecurity</string>
+			<string>com.cisco.pkg.anyconnect.dart</string>
+			<string>com.cisco.pkg.anyconnect.websecurity_v2</string>
+			<string>com.cisco.pkg.anyconnect.fireamp</string>
+			<string>com.cisco.pkg.anyconnect.iseposture</string>
+			<string>com.cisco.pkg.anyconnect.nvm_v2</string>
+			<string>com.cisco.pkg.anyconnect.umbrella</string>
+		</array>
 		<key>pkginfo</key>
 		<dict>
 			<key>description</key>
@@ -154,18 +164,7 @@
 			<key>Processor</key>
 			<string>com.github.keeleysam.recipes.GoogleTalkPlugin/MunkiPkginfoReceiptsEditor</string>
 			<key>Arguments</key>
-			<dict>
-				<key>pkg_ids_set_optional_true</key>
-				<array>
-					<string>com.cisco.pkg.anyconnect.websecurity</string>
-					<string>com.cisco.pkg.anyconnect.dart</string>
-					<string>com.cisco.pkg.anyconnect.websecurity_v2</string>
-					<string>com.cisco.pkg.anyconnect.fireamp</string>
-					<string>com.cisco.pkg.anyconnect.iseposture</string>
-					<string>com.cisco.pkg.anyconnect.nvm_v2</string>
-					<string>com.cisco.pkg.anyconnect.umbrella</string>
-				</array>
-			</dict>
+			<dict/>
 		</dict>
 	</array>
 </dict>
