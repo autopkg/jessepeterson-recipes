@@ -18,6 +18,7 @@
 #
 """See docstring for LoginScriptPluginUninstallCreator class"""
 
+from __future__ import absolute_import
 from os import rename
 from autopkglib import Processor
 

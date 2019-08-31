@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import absolute_import
+from __future__ import print_function
 import os
 import subprocess
 
@@ -48,7 +50,7 @@ class CUDADriverURLProvider(Processor):
 		try:
 			plist_text = subprocess.check_output(['/usr/bin/curl', '-s', '-1', CHECK_URL])
 		except BaseException as e:
-			print e
+			print(e)
 			raise ProcessorError('Could not retrieve check URL %s' % CHECK_URL)
 
 		plist_filename = os.path.join(self.env['RECIPE_CACHE_DIR'], PLIST_FN)
