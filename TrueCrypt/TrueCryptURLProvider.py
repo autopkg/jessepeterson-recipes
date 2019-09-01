@@ -2,10 +2,14 @@
 
 from __future__ import absolute_import
 import re
-import urllib
 import urllib2
 
 from autopkglib import Processor, ProcessorError
+
+try:
+    from urllib import request as urllib  # For Python 3
+except ImportError:
+    import urllib  # For Python 2
 
 __all__ = ["TrueCryptURLProvider"]
 
