@@ -7,9 +7,14 @@ import urllib2
 from autopkglib import Processor, ProcessorError
 
 try:
-    from urllib import request as urllib  # For Python 3
+    from urllib.parse import urlencode  # For Python 3
 except ImportError:
-    import urllib  # For Python 2
+    from urllib import urlencode  # For Python 2
+
+try:
+    from urllib.request import pathname2url  # For Python 3
+except ImportError:
+    from urllib import pathname2url  # For Python 2
 
 __all__ = ["TrueCryptURLProvider"]
 
@@ -67,7 +72,7 @@ class TrueCryptURLProvider(Processor):
         }
 
         try:
-            req = urllib2.Request(DLS_URL, urllib.urlencode(submit_form))
+            req = urllib2.Request(DLS_URL, urlencode(submit_form))
 
             opener = urllib2.build_opener(NoRedirectHandler)
 
@@ -83,7 +88,7 @@ class TrueCryptURLProvider(Processor):
         # hack to re-assemble URL with urlencoded filename part
         url_split = url.split('/')
         new_url = '/'.join(url_split[0:3]) + '/'
-        new_url += urllib.pathname2url('/'.join(url_split[3:]))
+        new_url += pathname2url('/'.join(url_split[3:]))
 
         return new_url
 
