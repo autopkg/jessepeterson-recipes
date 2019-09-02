@@ -21,7 +21,7 @@ __all__ = ["TrueCryptURLProvider"]
 
 DLV_URL = 'http://www.truecrypt.org/downloads'
 DLS_URL = 'http://www.truecrypt.org/dl'
-re_verfind = re.compile('<input type="hidden" name="DownloadVersion" value="([0-9A-Za-z\.]*)">')
+re_verfind = re.compile(r'<input type="hidden" name="DownloadVersion" value="([0-9A-Za-z\.]*)">')
 
 class TrueCryptURLProvider(Processor):
     '''Provides URL to the latest TrueCrypt installer DMG.'''

@@ -22,8 +22,8 @@ UPDATE_CHECK_URL = 'https://update.virtualbox.org/query.php?platform=DARWIN_64BI
 ROOT_URL = 'http://download.virtualbox.org/virtualbox'
 LATEST_URL = ROOT_URL + '/LATEST.TXT'
 
-re_vbox = re.compile('(VirtualBox-([0-9\.]*)-[0-9]*-OSX\.dmg)')
-re_ext = re.compile('(Oracle_VM_VirtualBox_Extension_Pack-[0-9\.]*-[0-9]*\.vbox-extpack)')
+re_vbox = re.compile(r'(VirtualBox-([0-9\.]*)-[0-9]*-OSX\.dmg)')
+re_ext = re.compile(r'(Oracle_VM_VirtualBox_Extension_Pack-[0-9\.]*-[0-9]*\.vbox-extpack)')
 
 class VirtualBoxURLProvider(Processor):
     '''Provides URL to the latest VirtualBox version.'''
