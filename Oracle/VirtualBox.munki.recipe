@@ -42,39 +42,24 @@
 				<string>x86_64</string>
 			</array>
 		</dict>
-	</dict>
-	<key>Process</key>
-	<array>
-		<dict>
-			<key>Processor</key>
-			<string>VirtualBoxURLProvider</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-			<key>Arguments</key>
-			<dict>
-				<key>url</key>
-				<string>%virtualbox_url%</string>
-				<key>filename</key>
-				<string>%NAME%.dmg</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_path</key>
-				<string>%pathname%</string>
-				<key>repo_subdirectory</key>
-				<string>%MUNKI_REPO_SUBDIR%</string>
-			</dict>
-		</dict>
-	</array>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>0.6.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.sheagcraig.download.VirtualBox</string>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+            </dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+        </dict>
+    </array>
 </dict>
 </plist>
