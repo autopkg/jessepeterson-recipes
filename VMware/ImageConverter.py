@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 from __future__ import absolute_import
-import subprocess
+
 import os
+import subprocess
+
 from autopkglib import Processor, ProcessorError
 
 __all__ = ["ImageConverter"]
