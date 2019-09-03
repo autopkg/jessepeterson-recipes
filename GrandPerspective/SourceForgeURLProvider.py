@@ -68,7 +68,7 @@ class SourceForgeURLProvider(Processor):
             f = urlopen(flisturl)
             rss = f.read()
             f.close()
-        except BaseException as e:
+        except Exception as e:
             raise ProcessorError('Could not retrieve RSS feed %s' % flisturl)
 
         re_file = re.compile(self.env.get('SOURCEFORGE_FILE_PATTERN'), re.I)

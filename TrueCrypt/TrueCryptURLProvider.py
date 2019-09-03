@@ -44,7 +44,7 @@ class TrueCryptURLProvider(Processor):
             f = urllib2.urlopen(DLV_URL)
             content = f.read()
             f.close()
-        except BaseException as e:
+        except Exception as e:
             raise ProcessorError('Could not retrieve URL: %s' % DLV_URL)
 
         m = re_verfind.search(content)
@@ -80,7 +80,7 @@ class TrueCryptURLProvider(Processor):
             f = opener.open(req)
             content = f.read()
             f.close()
-        except BaseException as e:
+        except Exception as e:
             if isinstance(e, urllib2.HTTPError) and e.code == 302:
                 url = e.headers['Location']
             else:

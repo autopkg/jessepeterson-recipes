@@ -49,7 +49,7 @@ class VirtualBoxURLProvider(Processor):
             f = urlopen(LATEST_URL)
             latest = f.readline().rstrip()
             f.close()
-        except BaseException as e:
+        except Exception as e:
             raise ProcessorError('Could not retrieve URL: %s' % LATEST_URL)
 
         # lame! use RE some day
@@ -74,7 +74,7 @@ class VirtualBoxURLProvider(Processor):
             f = urlopen(UPDATE_CHECK_URL)
             latest = f.readline()
             f.close()
-        except BaseException as e:
+        except Exception as e:
             raise ProcessorError('Could not retrieve URL: %s' % LATEST_URL)
 
         upd_url = latest.split(' ', 1)[1]
@@ -94,7 +94,7 @@ class VirtualBoxURLProvider(Processor):
             f = urlopen(md5_url)
             md5sums = f.read()
             f.close()
-        except BaseException as e:
+        except Exception as e:
             raise ProcessorError('Could not retrieve URL: %s' % md5_url)
 
         m = re_vbox.search(md5sums)
