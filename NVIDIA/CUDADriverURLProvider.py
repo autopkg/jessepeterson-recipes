@@ -43,7 +43,7 @@ class CUDADriverURLProvider(Processor):
         try:
             predicate = NSPredicate.predicateWithFormat_(predicate_str)
         except:
-            raise ProcessorError('Problem with NSPredicate: %s' % rule['Predicate'])
+            raise ProcessorError('Problem with NSPredicate: %s' % predicate_str)
         return predicate.evaluateWithObject_(eval_obj)
 
 
