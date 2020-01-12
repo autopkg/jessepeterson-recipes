@@ -3,18 +3,21 @@
 from __future__ import absolute_import, print_function
 
 import os
-import subprocess
 
-import FoundationPlist
-from autopkglib import Processor, ProcessorError
+from autopkglib import Processor, ProcessorError, URLGetter
 from Foundation import NSPredicate
+
+try:
+    from plistlib import loads as load_plist # Python 3
+except ImportError:
+    from plistlib import readPlistFromString as load_plist # Python 2
 
 __all__ = ["CUDADriverURLProvider"]
 
 CHECK_URL = 'https://partners.download.nvidia.com/activation/cuda_update_macos.xml'
 PLIST_FN  = 'cuda_update_macos.plist'
 
-class CUDADriverURLProvider(Processor):
+class CUDADriverURLProvider(URLGetter):
     '''Provides URL to the latest CUDA Driver download from NVIDIA.'''
 
     input_variables = {
@@ -48,23 +51,11 @@ class CUDADriverURLProvider(Processor):
 
 
     def get_url(self, os_ver):
-        try:
-            plist_text = subprocess.check_output(['/usr/bin/curl', '-s', '-1', CHECK_URL])
-        except Exception as e:
-            print(e)
-            raise ProcessorError('Could not retrieve check URL %s' % CHECK_URL)
-
+        plist_text = self.download(CHECK_URL)
         plist_filename = os.path.join(self.env['RECIPE_CACHE_DIR'], PLIST_FN)
 
         try:
-            plistf = open(plist_filename, 'w')
-            plistf.write(plist_text)
-            plistf.close()
-        except:
-            raise ProcessorError('Could not write NVIDIA plist file %s' % plist_filename)
-
-        try:
-            plist = FoundationPlist.readPlist(plist_filename)
+            plist = load_plist(plist_text)
         except:
             raise ProcessorError('Could not read NVIDIA plist file %s' % plist_filename)
 
@@ -101,11 +92,7 @@ class CUDADriverURLProvider(Processor):
         return (url, version, minimum_os_ver)
 
     def main(self):
-        if 'cuda_os_ver' in self.env:
-            cuda_os_ver = self.env['cuda_os_ver']
-        else:
-            cuda_os_ver = '10.10'
-
+        cuda_os_ver = self.env['cuda_os_ver']
         self.env['url'], self.env['version'], self.env['minimum_os_version'] = self.get_url(cuda_os_ver)
         self.output('File URL %s, Version number %s' % (self.env['url'], self.env['version']))
 
