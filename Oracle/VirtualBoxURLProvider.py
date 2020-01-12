@@ -4,12 +4,7 @@ from __future__ import absolute_import
 
 import re
 
-from autopkglib import Processor, ProcessorError
-
-try:
-    from urllib.request import urlopen  # For Python 3
-except ImportError:
-    from urllib2 import urlopen  # For Python 2
+from autopkglib import Processor, ProcessorError, URLGetter
 
 __all__ = ["VirtualBoxURLProvider"]
 
@@ -19,13 +14,13 @@ UPDATE_CHECK_URL = 'https://update.virtualbox.org/query.php?platform=DARWIN_64BI
 #   VirtualBox 4.3.16 <macosx.64 [Product: Darwiease: 13.4.0 | Version: Darwin Kernel Version 13.4.0: Sun Aug 17 19:50:11 PDT 2014; root:xnu-2422.115.4~1/RELEASE_X86_64]>
 # See also https://github.com/autopkg/jessepeterson-recipes/issues/3
 
-ROOT_URL = 'http://download.virtualbox.org/virtualbox'
+ROOT_URL = 'https://download.virtualbox.org/virtualbox'
 LATEST_URL = ROOT_URL + '/LATEST.TXT'
 
 re_vbox = re.compile(r'(VirtualBox-([0-9\.]*)-[0-9]*-OSX\.dmg)')
 re_ext = re.compile(r'(Oracle_VM_VirtualBox_Extension_Pack-[0-9\.]*-[0-9]*\.vbox-extpack)')
 
-class VirtualBoxURLProvider(Processor):
+class VirtualBoxURLProvider(URLGetter):
     '''Provides URL to the latest VirtualBox version.'''
 
     input_variables = {}
@@ -46,9 +41,7 @@ class VirtualBoxURLProvider(Processor):
 
     def get_latest_file(self):
         try:
-            f = urlopen(LATEST_URL)
-            latest = f.readline().rstrip()
-            f.close()
+            latest = self.download(LATEST_URL, text=True).rstrip()
         except Exception as e:
             raise ProcessorError('Could not retrieve URL: %s' % LATEST_URL)
 
@@ -71,9 +64,7 @@ class VirtualBoxURLProvider(Processor):
         version number from the second parameter which apparently is still
         the correct and current stable release URL.'''
         try:
-            f = urlopen(UPDATE_CHECK_URL)
-            latest = f.readline()
-            f.close()
+            latest = self.download(UPDATE_CHECK_URL)
         except Exception as e:
             raise ProcessorError('Could not retrieve URL: %s' % LATEST_URL)
 
@@ -91,9 +82,7 @@ class VirtualBoxURLProvider(Processor):
         md5_url = '/'.join((ROOT_URL, version, 'MD5SUMS', ))
 
         try:
-            f = urlopen(md5_url)
-            md5sums = f.read()
-            f.close()
+            md5sums = self.download(md5_url, text=True)
         except Exception as e:
             raise ProcessorError('Could not retrieve URL: %s' % md5_url)
 

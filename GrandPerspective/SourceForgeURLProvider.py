@@ -5,21 +5,16 @@ from __future__ import absolute_import
 import datetime
 import json
 import re
-from xml.dom.minidom import parse, parseString
+from xml.dom.minidom import parseString
 
-from autopkglib import Processor, ProcessorError
-
-try:
-    from urllib.request import urlopen  # For Python 3
-except ImportError:
-    from urllib2 import urlopen  # For Python 2
+from autopkglib import Processor, ProcessorError, URLGetter
 
 __all__ = ["SourceForgeURLProvider"]
 
 FILE_INDEX_URL = 'http://sourceforge.net/api/file/index/project-id/%s/rss'
 PROJECT_NAME_URL = 'https://sourceforge.net/rest/p/%s'
 
-class SourceForgeURLProvider(Processor):
+class SourceForgeURLProvider(URLGetter):
     '''Provides URL to the latest file that matches a pattern for a particular SourceForge project.'''
 
     input_variables = {
@@ -47,9 +42,7 @@ class SourceForgeURLProvider(Processor):
     def get_sf_project_id(self, pname):
         # borrowed from https://gist.github.com/homebysix/9468859a76ac82f1d121
         try:
-            f = urlopen(PROJECT_NAME_URL % pname)
-            raw_json = f.read()
-            f.close()
+            raw_json = self.download(PROJECT_NAME_URL % pname)
         except:
             raise ProcessorError('Could not retrieve project name URL for "%s"' % pname)
 
@@ -65,9 +58,7 @@ class SourceForgeURLProvider(Processor):
         flisturl = FILE_INDEX_URL % proj_id
 
         try:
-            f = urlopen(flisturl)
-            rss = f.read()
-            f.close()
+            rss = self.download(flisturl)
         except Exception as e:
             raise ProcessorError('Could not retrieve RSS feed %s' % flisturl)
 

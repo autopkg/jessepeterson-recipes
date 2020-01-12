@@ -5,12 +5,7 @@ from __future__ import absolute_import
 import re
 from xml.dom.minidom import parseString
 
-from autopkglib import Processor, ProcessorError
-
-try:
-    from urllib.request import urlopen  # For Python 3
-except ImportError:
-    from urllib2 import urlopen  # For Python 2
+from autopkglib import Processor, ProcessorError, URLGetter
 
 __all__ = ["VMwareToolsURLProvider"]
 
@@ -18,7 +13,7 @@ FUSION_URL_BASE = 'https://softwareupdate.vmware.com/cds/vmw-desktop/'
 DARWIN_TOOLS_URL_APPEND = 'packages/com.vmware.fusion.tools.darwin.zip.tar'
 DEFAULT_VERSION_SERIES = '11.0.0'
 
-class VMwareToolsURLProvider(Processor):
+class VMwareToolsURLProvider(URLGetter):
     '''Provides URL to the latest Darwin ISO of the VMware Fusion tools.'''
 
     input_variables = {
@@ -36,9 +31,7 @@ class VMwareToolsURLProvider(Processor):
     def get_url(self, version_series):
         try:
             fusion_url = FUSION_URL_BASE + '/fusion.xml'
-            f = urlopen(fusion_url)
-            fusion_xml = f.read()
-            f.close()
+            fusion_xml = self.download(fusion_url)
         except Exception as e:
             raise ProcessorError('Could not retrieve XML feed %s' % fusion_url)
 
@@ -65,7 +58,7 @@ class VMwareToolsURLProvider(Processor):
                     build_no = match.group(2)
                     url_part = match.group(0)
 
-                    if build_no > last_build_no:
+                    if int(build_no) > int(last_build_no):
                         last_build_no = build_no
                         last_url_part = url_part
 
