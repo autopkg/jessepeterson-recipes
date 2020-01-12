@@ -20,8 +20,10 @@ class CUDADriverURLProvider(Processor):
     input_variables = {
         'cuda_os_ver': {
             'required': False,
-            'description': 'Version of OS to test the CUDA update NSPredicate with. Defaults to currently shipping Apple Mac OS X version.',
-            },
+            'default': '10.14',
+            'description': 'Version of OS to test the CUDA update '
+                           'NSPredicate with. Defaults to 10.14.',
+        },
     }
     output_variables = {
         'minimum_os_version': {
