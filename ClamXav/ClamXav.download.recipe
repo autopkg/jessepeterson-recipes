@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads ClamXav and imports into Munki.</string>
+	<string>Downloads the latest release of ClamXav.</string>
 	<key>Identifier</key>
 	<string>com.github.jessepeterson.download.ClamXav</string>
 	<key>Input</key>
