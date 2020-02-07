@@ -36,6 +36,10 @@
 	<array>
 		<dict>
 			<key>Processor</key>
+			<string>DeprecationWarning</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>TrueCryptURLProvider</string>
 		</dict>
 		<dict>
