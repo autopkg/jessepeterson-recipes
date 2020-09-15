@@ -14,6 +14,8 @@
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Virtualization</string>
+		<key>LICENSE</key>
+		<string>33d7284dc4a0ece381196fda3cfe2ed0e1e8e7ed7f27b9a9ebc4ee22e24bd23c</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>category</key>
@@ -113,6 +115,7 @@ exit 1</string>
 					<string>#!/bin/sh
 
 VBM=/usr/local/bin/VBoxManage
+license=&quot;%LICENSE%&quot;
 
 if [ ! -f $VBM ]
 then
@@ -120,7 +123,7 @@ then
 	exit 1
 fi
 
-$VBM extpack install --accept-license=56be48f923303c8cababb0bb4c478284b688ed23f16d775d729b89a2e8e5f9eb --replace \
+$VBM extpack install --accept-license=$license --replace \
 	/tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
 
 exit $?
