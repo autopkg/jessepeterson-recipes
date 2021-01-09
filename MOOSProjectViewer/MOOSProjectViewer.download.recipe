@@ -17,7 +17,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://www.moosprojectviewer.com/download.php</string>
+				<string>https://www.moosprojectviewer.com/download.php</string>
 				<key>re_pattern</key>
 				<string>(?P&lt;url_part&gt;downloads/MOOS-[0-9\.]*dmg)</string>
 			</dict>
