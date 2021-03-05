@@ -18,6 +18,19 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>warning_message</key>
+				<string>Nvidia CUDA 10.2 (toolkit and driver) was the last release to support macOS. Details:
+	- https://docs.nvidia.com/cuda/archive/10.2/cuda-toolkit-release-notes/index.html#title-new-features
+	- https://mjtsai.com/blog/2019/11/25/nvidia-drops-cuda-support-for-macos/
+	- https://gizmodo.com/apple-and-nvidia-are-over-1840015246
+				</string>
+			</dict>
+			<key>Processor</key>
+			<string>DeprecationWarning</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
 				<key>cuda_os_ver</key>
 				<string>%MAJOR_OS_VERSION%</string>
 			</dict>
