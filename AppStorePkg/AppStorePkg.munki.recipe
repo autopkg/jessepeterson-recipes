@@ -19,6 +19,7 @@
 			<dict>
 				<key>info_path</key>
 				<string>/Applications/%APP_NAME%/Contents/Info.plist</string>
+				<key>plist_keys</key>
 				<dict>
 					<key>CFBundleShortVersionString</key>
 					<string>version</string>
