@@ -14,11 +14,17 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>Versioner</string>
+			<string>PlistReader</string>
 			<key>Arguments</key>
 			<dict>
-				<key>input_plist_path</key>
+				<key>info_path</key>
 				<string>/Applications/%APP_NAME%/Contents/Info.plist</string>
+				<dict>
+					<key>CFBundleShortVersionString</key>
+					<string>version</string>
+					<key>LSMinimumSystemVersion</key>
+					<string>min_os_version</string>
+				</dict>
 			</dict>
 		</dict>
 		<dict>
@@ -28,6 +34,8 @@
 				<dict>
 					<key>version</key>
 					<string>%version%</string>
+					<key>minimum_os_version</key>
+					<string>%min_os_version%</string>
 					<key>postinstall_script</key>
 					<string>#!/bin/sh
 
