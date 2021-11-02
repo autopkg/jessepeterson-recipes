@@ -3,71 +3,93 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads Code42 CrashPlan Platform Installer 5 for Mac</string>
+	<string>Downloads the latest version of Code42 from the vendor.</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.jessepeterson.download.CrashPlan</string>
 	<key>Input</key>
 	<dict>
+		<key>DOWNLOAD_URL</key>
+		<string>https://download.code42.com/installs/agent/latest-mac.dmg</string>
 		<key>NAME</key>
-		<string>CrashPlan</string>
-		<key>CHECK_PAGE</key>
-		<string>https://support.code42.com/Administrator/5/Planning_And_Installing/Code42_Platform_Installers</string>
-		<key>RE_PATTERN</key>
-		<string>href=\&quot;(?P&lt;url&gt;https.*/Code42CrashPlan_(?P&lt;file_version&gt;5[0-9\.]+)_Mac\.dmg)\&quot;</string>
+		<string>Code42</string>
 	</dict>
 	<key>Process</key>
 	<array>
 		<dict>
-			<key>Processor</key>
-			<string>URLTextSearcher</string>
-			<key>Arguments</key>
-			<dict>
-				<key>url</key>
-				<string>%CHECK_PAGE%</string>
-				<key>re_pattern</key>
-				<string>%RE_PATTERN%</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
+				<key>url</key>
+				<string>%DOWNLOAD_URL%</string>
 			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>com.github.jessepeterson.munki.VMwareTools/ImageConverter</string>
 			<key>Arguments</key>
 			<dict>
-				<key>image_source</key>
-				<string>%pathname%</string>
-				<key>image_destination</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
-				<key>image_format</key>
-				<string>UDZO</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/temp/flat_pkg/</string>
+				<key>flat_pkg_path</key>
+				<string>%pathname%/Install Code42.pkg</string>
 			</dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>CodeSignatureVerifier</string>
 			<key>Arguments</key>
 			<dict>
-				<key>input_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg/Install Code42 CrashPlan.pkg</string>
 				<key>expected_authority_names</key>
 				<array>
 					<string>Developer ID Installer: Code 42 Software (9YV9435DHD)</string>
 					<string>Developer ID Certification Authority</string>
 					<string>Apple Root CA</string>
 				</array>
+				<key>input_path</key>
+				<string>%flat_pkg_path%</string>
 			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/temp/payload/</string>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/temp/flat_pkg/code42.pkg/Payload</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/temp/payload/</string>
+				<key>input_plist_path</key>
+				<string>%destination_path%/Code42.app/Contents/Info.plist</string>
+			</dict>
+			<key>Processor</key>
+			<string>Versioner</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/temp</string>
+				</array>
+			</dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
 		</dict>
 	</array>
 </dict>
