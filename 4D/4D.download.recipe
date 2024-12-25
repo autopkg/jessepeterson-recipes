@@ -15,8 +15,14 @@
 		<key>DOWNLOAD_RE</key>
 		<string>(?P&lt;url&gt;http://download.4d.com/Products/Current/4D_v[0-9]+_[0-9]+/4D_v(?P&lt;version&gt;[0-9]+\.[0-9\.]+)_Mac.dmg)</string>
 	</dict>
+	<key>MinimumVersion</key>
+	<string>1.1</string>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Processor</key>
+			<string>DeprecationWarning</string>
+		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
