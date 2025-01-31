@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Imports Basecamp 3 app into Munki.</string>
+	<string>Imports Basecamp 3 app into Munki. Leave PLATFORM blank for Intel, set PLATFORM to "_arm64" for Arm. Set ARCHITECTURE to "x86_64" for Intel or "arm64" for Arm.</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.jessepeterson-recipes.munki.Basecamp3</string>
 	<key>Input</key>
 	<dict>
+		<key>PLATFORM</key>
+		<string></string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Collaboration</string>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -23,13 +25,17 @@
 			<key>category</key>
 			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
-			<string>We built Basecamp 3 to work beautifully on your Mac, Macbook and iMac. Keep Basecamp 3 handy in the dock and get notifications right on your desktop. </string>
+			<string>We built Basecamp 3 %PLATFORM% to work beautifully on your Mac, Macbook and iMac. Keep Basecamp 3 handy in the dock and get notifications right on your desktop. </string>
 			<key>developer</key>
 			<string>Basecamp</string>
 			<key>display_name</key>
 			<string>Basecamp 3 for Mac</string>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>supported_architectures</key>
+			<array>
+			<string>%ARCHITECTURE%</string>
+			</array>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
