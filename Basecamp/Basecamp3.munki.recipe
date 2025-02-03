@@ -11,7 +11,7 @@
 		<key>PLATFORM</key>
 		<string></string>
 		<key>ARCHITECTURE</key>
-		<string></string>
+		<string>x86_64</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Collaboration</string>
 		<key>MUNKI_REPO_SUBDIR</key>
