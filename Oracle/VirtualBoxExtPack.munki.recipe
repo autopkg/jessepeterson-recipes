@@ -15,7 +15,7 @@
 		<key>MUNKI_CATEGORY</key>
 		<string>Virtualization</string>
 		<key>LICENSE</key>
-		<string>33d7284dc4a0ece381196fda3cfe2ed0e1e8e7ed7f27b9a9ebc4ee22e24bd23c</string>
+		<string>eb31505e56e9b4d0fbca139104da41ac6f6b98f8e78968bdf01b1f3da3c4f9ae</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>category</key>
@@ -50,7 +50,7 @@
 				<key>url</key>
 				<string>%extpack_url%</string>
 				<key>filename</key>
-				<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack</string>
+				<string>Oracle_VirtualBox_Extension_Pack.vbox-extpack</string>
 			</dict>
 		</dict>
 		<dict>
@@ -88,7 +88,7 @@ fi
 
 extpackoutput=`mktemp -t extpack`
 
-$VBM list extpacks | /usr/bin/grep -A 1 &apos;Oracle VM VirtualBox Extension Pack&apos; \
+$VBM list extpacks | /usr/bin/grep -A 1 &apos;Oracle VirtualBox Extension Pack&apos; \
 	&gt; &quot;$extpackoutput&quot;
 
 if [ $? -ne 0 ]
@@ -124,7 +124,7 @@ then
 fi
 
 $VBM extpack install --accept-license=$license --replace \
-	/tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
+	/tmp/Oracle_VirtualBox_Extension_Pack.vbox-extpack
 
 exit $?
 </string>
@@ -149,7 +149,7 @@ exit $?
 				<key>additional_makepkginfo_options</key>
 				<array>
 					<string>-i</string>
-					<string>Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack</string>
+					<string>Oracle_VirtualBox_Extension_Pack.vbox-extpack</string>
 					<string>--destinationpath</string>
 					<string>/tmp</string>
 				</array>
