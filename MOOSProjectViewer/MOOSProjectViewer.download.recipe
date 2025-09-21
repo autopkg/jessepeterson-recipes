@@ -28,7 +28,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://www.moosprojectviewer.com/%url_part%</string>
+				<string>https://www.moosprojectviewer.com/%url_part%</string>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 			</dict>

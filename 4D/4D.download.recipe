@@ -11,7 +11,7 @@
 		<key>NAME</key>
 		<string>4D</string>
 		<key>PRODUCT_URL</key>
-		<string>http://www.4d.com/downloads/products.html</string>
+		<string>https://www.4d.com/downloads/products.html</string>
 		<key>DOWNLOAD_RE</key>
 		<string>(?P&lt;url&gt;http://download.4d.com/Products/Current/4D_v[0-9]+_[0-9]+/4D_v(?P&lt;version&gt;[0-9]+\.[0-9\.]+)_Mac.dmg)</string>
 	</dict>
