@@ -85,7 +85,7 @@ rm -rf /Applications/ImageJ
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://wsr.imagej.net/distros/osx/</string>
+				<string>https://wsr.imagej.net/distros/osx/</string>
 				<key>re_pattern</key>
 				<string>ImageJ[0-9]*\.zip</string>
 			</dict>
@@ -96,7 +96,7 @@ rm -rf /Applications/ImageJ
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://wsr.imagej.net/distros/osx/%match%</string>
+				<string>https://wsr.imagej.net/distros/osx/%match%</string>
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 			</dict>

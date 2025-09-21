@@ -65,7 +65,7 @@ exit
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>http://www.extensis.com/support/product-support/portfolio-server-10/</string>
+				<string>https://www.extensis.com/support/product-support/portfolio-server-10/</string>
 				<key>re_pattern</key>
 				<string>(?P&lt;url&gt;http://dl.extensis.com/downloads/../EN/M/Portfolio-Client-M-10-[0-9-]*\.zip)</string>
 			</dict>
