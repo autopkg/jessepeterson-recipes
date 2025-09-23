@@ -3,13 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads latest Basecamp 3 Mac app.</string>
+	<string>Downloads latest Basecamp 3 Mac app. Leave PLATFORM blank for Intel, set PLATFORM to "_arm64" for Arm.</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.jessepeterson-recipes.download.Basecamp3</string>
 	<key>Input</key>
 	<dict>
+		<key>PLATFORM</key>
+		<string></string>
 		<key>DOWNLOAD_URL</key>
-		<string>https://bc3-desktop.s3.amazonaws.com/mac/basecamp3.dmg</string>
+		<string>https://bc3-desktop.s3.amazonaws.com/mac%PLATFORM%/basecamp3%PLATFORM%.dmg</string>
 		<key>NAME</key>
 		<string>Basecamp3</string>
 	</dict>
